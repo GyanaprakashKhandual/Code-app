@@ -1,4 +1,4 @@
-import CyberSecurityNavbar from '@/app/components/CNavbar'
+import CyberSecurityNavbar from '@/app/Navbars/Cyber'
 import React from 'react'
 
 function cs() {

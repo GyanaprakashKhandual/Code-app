@@ -6,13 +6,13 @@ import { Coffee, Terminal, Network, Shield, Rat, Crown, GitBranch, Shell } from 
 
 // Import statements for external components
 // These would be imported from actual component files
-import Linux from '../learning/Linux'
-import Bash from '../learning/Bash';
+import Linux from '../learning/Cyber/Linux'
+import Bash from '../learning/Cyber/Bash';
 // import Nmap from '../component/nmap'
 // import BurpSuite from '../component/burpsuite'
 // import FatRat from '../component/fatrat'
 // import Empire from '../component/empire'
-import Git from '../learning/Git';
+import Git from '../learning/Cyber/Git';
 // import PowerShell from '../component/powershell'
 
 
