@@ -1,5 +1,5 @@
 import React from 'react'
-import DSidebar from '../components/DSidebar'
+import DSidebar from '../components/Sidebars/Dev'
 
 function page() {
   return (

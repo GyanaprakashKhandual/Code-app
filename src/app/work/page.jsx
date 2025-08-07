@@ -1,5 +1,5 @@
 import React from 'react'
-import WSidebar from '../components/WSidebar'
+import WSidebar from '../components/Sidebars/Work';
 
 function page() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import GSidebar from '../components/GSidebar'
+import GSidebar from '../components/Sidebars/Guide'
 
 function page() {
   return (

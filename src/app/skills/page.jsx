@@ -1,5 +1,5 @@
 import React from 'react'
-import SSidebar from '../components/SSidebar'
+import SSidebar from '../components/Sidebars/Skill';
 
 function page() {
   return (

@@ -1,6 +1,5 @@
 import React from 'react'
-import SSidebar from '../components/SSidebar'
-import ProjectSidebar from '../components/PSidebar'
+import ProjectSidebar from '../components/Sidebars/Project';
 
 function page() {
   return (
