@@ -16,7 +16,7 @@ export default function Linux() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch('http://localhost:5000/api/linux-learning')
+      const response = await fetch('https://port-backend-lh99.onrender.com/api/linux-learning')
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
