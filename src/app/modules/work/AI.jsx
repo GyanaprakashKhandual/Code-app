@@ -38,7 +38,8 @@ const AIWorkExperience = () => {
       'Audit Pro (Compliance and Audit Management)': 'https://github.com/GyanaprakashKhandual/audit-pro',
       'Mega Jewelers (Inventory and Billing System)': 'https://github.com/GyanaprakashKhandual/mega-jewelers',
       'Get My Policy Online (Insurance Policy Portal)': 'https://github.com/GyanaprakashKhandual/get-my-policy-online',
-      'REVX Capital (Financial and Lending Dashboard)': 'https://github.com/GyanaprakashKhandual/revx-capital'
+      'REVX Capital (Financial and Lending Dashboard)': 'https://github.com/GyanaprakashKhandual/revx-capital',
+      'Litig Pro (Legal Document Management)': 'https://github.xom/GyanaprakashKhandual/litig-pro'
     }
   });
 
@@ -95,7 +96,7 @@ const AIWorkExperience = () => {
                 { label: 'Total Projects', value: Object.keys(workData.projects).length, color: 'from-sky-400 to-sky-500', icon: Code },
                 { label: 'Responsibilities', value: workData.rolesAndResponsibilities.length, color: 'from-emerald-400 to-emerald-500', icon: CheckCircle },
                 { label: 'Work Type', value: 'Remote', color: 'from-violet-400 to-violet-500', icon: Clock },
-                { label: 'Experience', value: '3+ Months', color: 'from-rose-400 to-rose-500', icon: Calendar }
+                { label: 'Experience', value: '4+ Months', color: 'from-rose-400 to-rose-500', icon: Calendar }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -117,7 +118,7 @@ const AIWorkExperience = () => {
           {/* Roles and Responsibilities */}
           <motion.div
             variants={itemVariants}
-            className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-emerald-100 p-4 hover:shadow-xl transition-all duration-300 flex flex-col min-h-0"
+            className="bg-white/80 backdrop-blur-sm rounded-xl border border-emerald-100 p-4 hover:shadow-xl transition-all duration-300 flex flex-col min-h-0"
           >
             <div className="flex items-center gap-2 mb-3 flex-shrink-0">
               <div className="p-2 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-lg">
@@ -145,7 +146,7 @@ const AIWorkExperience = () => {
           {/* Projects */}
           <motion.div
             variants={itemVariants}
-            className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-violet-100 p-4 hover:shadow-xl transition-all duration-300 flex flex-col min-h-0"
+            className="bg-white/80 backdrop-blur-sm rounded-xl  border border-violet-100 p-4 hover:shadow-xl transition-all duration-300 flex flex-col min-h-0"
           >
             <div className="flex items-center gap-2 mb-3 flex-shrink-0">
               <div className="p-2 bg-gradient-to-br from-violet-400 to-violet-500 rounded-lg">

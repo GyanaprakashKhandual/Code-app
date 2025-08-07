@@ -48,7 +48,7 @@ const MainContent = () => {
 
   // Dashboard statistics
   const stats = [
-    { label: "Total Experience", value: "3+ Months", icon: Clock, color: "from-blue-500 to-cyan-500" },
+    { label: "Total Experience", value: "4+ Months", icon: Clock, color: "from-blue-500 to-cyan-500" },
     { label: "Companies", value: "1", icon: Building, color: "from-purple-500 to-pink-500" },
     { label: "Projects", value: "7+", icon: Briefcase, color: "from-green-500 to-emerald-500" },
     { label: "Team Members", value: "12", icon: Users, color: "from-orange-500 to-red-500" }
@@ -283,7 +283,7 @@ const WSidebar = () => {
       {/* Sidebar */}
       <div className='sticky top-14 self-start z-10'>
         <div
-          className={`flex flex-col bg-gradient-to-b from-white/95 via-cyan-50/90 to-indigo-50/95 border-r border-cyan-200/50 shadow-lg transition-all duration-300 ${
+          className={`flex flex-col bg-gradient-to-b from-white/95 via-cyan-50/90 to-indigo-50/95 border-r border-cyan-200/50  transition-all duration-300 ${
             isOpen ? 'w-80' : 'w-20'
           } h-[calc(100vh-56px)]`}
         >
