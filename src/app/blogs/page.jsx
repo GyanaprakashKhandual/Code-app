@@ -1,5 +1,5 @@
 import React from 'react'
-import BSidebar from '../components/BSidebar'
+import BSidebar from '../components/Sidebars/Blog';
 
 function page() {
   return (
