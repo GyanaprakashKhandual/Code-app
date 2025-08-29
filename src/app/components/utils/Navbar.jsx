@@ -45,42 +45,91 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gradient-to-r from-purple-100 via-sky-50 to-blue-50 sticky top-0 z-50 border-b border-white/30 backdrop-blur-sm">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
           <motion.div 
             className="flex items-center space-x-2 cursor-pointer"
             onClick={() => handleNavClick('/')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            <FaCoffee className="text-2xl text-amber-600" />
-            <span className="text-xl font-bold text-gray-800">The Calos</span>
+            <FaCoffee className="w-8 h-8 text-blue-900" />
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">The Calos</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {/* About Dropdown */}
-            <div className="relative">
-              <Dropdown
-                options={aboutOptions}
-                placeholder="About"
-                onChange={handleDropdownChange}
-                variant="default"
-                size="md"
-                className="min-w-32"
-              />
-            </div>
-
+            {/* About */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/about')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+                About
+            </motion.button>
             {/* Education */}
             <motion.button
-              className="text-gray-600 hover:text-amber-600 font-medium transition-colors duration-200"
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
               onClick={() => handleNavClick('/education')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Education
+            </motion.button>
+            {/* our products */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/products')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Our Products
+            </motion.button>
+            {/* Web Projects */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/web-projects')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Web Projects
+            </motion.button>
+            {/* Testing Projects */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/education')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Test Projects
+            </motion.button>
+            {/* Blog */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/blog')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Blog
+            </motion.button>
+            {/* Work */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/work')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Work
+            </motion.button>
+            {/* contact */}
+            <motion.button
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
+              onClick={() => handleNavClick('/contact')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact
             </motion.button>
 
             {/* Project Dropdown */}
@@ -109,7 +158,7 @@ const Navbar = () => {
 
             {/* Blog */}
             <motion.button
-              className="text-gray-600 hover:text-amber-600 font-medium transition-colors duration-200"
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
               onClick={() => handleNavClick('/blog')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -119,7 +168,7 @@ const Navbar = () => {
 
             {/* Contact */}
             <motion.button
-              className="text-gray-600 hover:text-amber-600 font-medium transition-colors duration-200"
+              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
               onClick={() => handleNavClick('/contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -132,7 +181,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <motion.button
               onClick={toggleMobileMenu}
-              className="text-gray-600 hover:text-amber-600 focus:outline-none focus:text-amber-600"
+              className="text-slate-700 hover:text-purple-600 focus:outline-none focus:text-purple-600 p-2 rounded-lg hover:bg-white/50 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -153,12 +202,12 @@ const Navbar = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white border-t border-gray-200"
+              className="lg:hidden bg-gradient-to-br from-white/95 via-purple-50/90 to-sky-50/95 backdrop-blur-md border-t border-white/40 shadow-lg"
             >
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {/* About Dropdown Mobile */}
                 <div className="block px-3 py-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">About</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">About</label>
                   <Dropdown
                     options={aboutOptions}
                     placeholder="Select option"
@@ -171,7 +220,7 @@ const Navbar = () => {
 
                 {/* Education Mobile */}
                 <motion.button
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-amber-600 hover:bg-gray-50 transition-colors duration-200"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-white/60 hover:to-purple-50/60 rounded-lg transition-all duration-300"
                   onClick={() => handleNavClick('/education')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -181,7 +230,7 @@ const Navbar = () => {
 
                 {/* Project Dropdown Mobile */}
                 <div className="block px-3 py-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Project</label>
                   <Dropdown
                     options={webAppOptions}
                     placeholder="Select project"
@@ -194,7 +243,7 @@ const Navbar = () => {
 
                 {/* Work Dropdown Mobile */}
                 <div className="block px-3 py-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Work</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Work</label>
                   <Dropdown
                     options={testOptions}
                     placeholder="Select work"
@@ -207,7 +256,7 @@ const Navbar = () => {
 
                 {/* Blog Mobile */}
                 <motion.button
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-amber-600 hover:bg-gray-50 transition-colors duration-200"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-white/60 hover:to-purple-50/60 rounded-lg transition-all duration-300"
                   onClick={() => handleNavClick('/blog')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -217,7 +266,7 @@ const Navbar = () => {
 
                 {/* Contact Mobile */}
                 <motion.button
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-amber-600 hover:bg-gray-50 transition-colors duration-200"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-white/60 hover:to-purple-50/60 rounded-lg transition-all duration-300"
                   onClick={() => handleNavClick('/contact')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -231,7 +280,7 @@ const Navbar = () => {
       </div>
 
       {/* Tablet Navigation (md to lg screens) */}
-      <div className="hidden md:flex lg:hidden items-center justify-center space-x-6 py-3 border-t border-gray-200 bg-gray-50">
+      <div className="hidden md:flex lg:hidden items-center justify-center space-x-6 py-3 border-t border-white/30 bg-gradient-to-r from-white/80 via-sky-50/80 to-purple-50/80 backdrop-blur-sm">
         {/* About Dropdown Tablet */}
         <div className="relative">
           <Dropdown
@@ -246,7 +295,7 @@ const Navbar = () => {
 
         {/* Education Tablet */}
         <motion.button
-          className="text-sm font-medium text-gray-600 hover:text-amber-600 transition-colors duration-200"
+          className="text-sm font-medium text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/50"
           onClick={() => handleNavClick('/education')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -280,7 +329,7 @@ const Navbar = () => {
 
         {/* Blog Tablet */}
         <motion.button
-          className="text-sm font-medium text-gray-600 hover:text-amber-600 transition-colors duration-200"
+          className="text-sm font-medium text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/50"
           onClick={() => handleNavClick('/blog')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -290,7 +339,7 @@ const Navbar = () => {
 
         {/* Contact Tablet */}
         <motion.button
-          className="text-sm font-medium text-gray-600 hover:text-amber-600 transition-colors duration-200"
+          className="text-sm font-medium text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/50"
           onClick={() => handleNavClick('/contact')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
