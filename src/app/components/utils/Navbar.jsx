@@ -54,7 +54,7 @@ const Navbar = () => {
             onClick={() => handleNavClick('/')}
           >
             <FaCoffee className="w-8 h-8 text-blue-900" />
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">The Calos</span>
+            <span className="w-8 h-8 font-bold bg-gradient-to-r from-purple-600 to-blue-900 bg-clip-text">The Calos</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -155,26 +155,6 @@ const Navbar = () => {
                 className="min-w-32"
               />
             </div>
-
-            {/* Blog */}
-            <motion.button
-              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
-              onClick={() => handleNavClick('/blog')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Blog
-            </motion.button>
-
-            {/* Contact */}
-            <motion.button
-              className="text-slate-700 hover:text-purple-600 font-medium transition-all duration-300 hover:scale-105"
-              onClick={() => handleNavClick('/contact')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact
-            </motion.button>
           </div>
 
           {/* Mobile menu button */}
