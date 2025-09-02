@@ -1,9 +1,10 @@
-import DooDotLanding from "./pages/web/Doodot";
+
+import RabbitLandingPage from "./pages/web/Rabbit";
 
 export default function Home() {
   return(
     <div>
-      <DooDotLanding/>
+      <RabbitLandingPage/>
     </div>
   )
 }
