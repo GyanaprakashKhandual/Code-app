@@ -28,6 +28,7 @@ const Navbar = () => {
         { id: 8, name: 'Veloria', href: '/veloria' },
         { id: 9, name: 'Calf', href: '/calf' },
         { id: 10, name: 'Oneiro', href: '/oneiro' },
+        { id: 11, name: 'DooDot', href: '/doodot' },
     ];
 
     const testProjectItems = [
