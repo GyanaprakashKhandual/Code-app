@@ -8,12 +8,15 @@ import { useRouter } from 'next/navigation';
 const Navbar = () => {
     const [isProductsOpen, setIsProductsOpen] = useState(false);
     const [isTestProjectOpen, setIsTestProjectOpen] = useState(false);
+    const [isExtensionOpen, setIsExtensionOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [productsSearch, setProductsSearch] = useState('');
     const [testProjectSearch, setTestProjectSearch] = useState('');
+    const [extensionSearch, setExtensionSearch] = useState('');
 
     const productsRef = useRef(null);
     const testProjectRef = useRef(null);
+    const extensionRef = useRef(null);
 
     const router = useRouter();
 
@@ -38,6 +41,10 @@ const Navbar = () => {
         { id: 4, name: 'Delta Analytics', href: '#' },
     ];
 
+    const extensionProjectItems = [
+        { id: 1, name: 'Caffetest-Tracker', href: '#' }
+    ]
+
     // Close dropdowns when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -46,6 +53,9 @@ const Navbar = () => {
             }
             if (testProjectRef.current && !testProjectRef.current.contains(event.target)) {
                 setIsTestProjectOpen(false);
+            }
+            if (extensionRef.current && !extensionRef.current.contains(event.target)) {
+                setIsExtensionOpen(false);
             }
         };
 
@@ -64,6 +74,10 @@ const Navbar = () => {
         item.name.toLowerCase().includes(testProjectSearch.toLowerCase())
     );
 
+    const filteredExtension = extensionProjectItems.filter(item =>
+        item.name.toLowerCase().includes(extensionSearch.toLowerCase())
+    );
+
     return (
         <nav className="bg-white text-gray-800 sticky top-0 z-50 border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,7 +87,7 @@ const Navbar = () => {
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center">
                             <FaCoffee className="h-8 w-8 text-blue-900" />
-                            <span className="ml-2 text-xl font-bold text-blue-700">Clyra</span>
+                            <span className="ml-4 text-xl font-bold text-blue-700">Clyra</span>
                         </div>
 
                         {/* Desktop navigation */}
@@ -227,6 +241,77 @@ const Navbar = () => {
                                                         ))
                                                     ) : (
                                                         <div className="px-4 py-2 text-sm text-gray-400">No test projects found</div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                            {/* Extension Dropdown*/}
+                            <div className="relative" ref={extensionRef}>
+                                <motion.button
+                                    onClick={() => {
+                                        setIsExtensionOpen(!isExtensionOpen);
+                                        setIsProductsOpen(false);
+                                        setIsTestProjectOpen(false);
+                                    }}
+                                    className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50 transition-all duration-300 ease-in-out flex items-center transform hover:scale-105"
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    Extension
+                                    <div className='pl-1 pr-1 mt-1'>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                                            <path d="M4 6l4 4 4-4z" fill="currentColor" />
+                                        </svg>
+                                    </div>
+
+                                </motion.button>
+
+                                <AnimatePresence>
+                                    {isExtensionOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="origin-top-left absolute left-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-gray-200 focus:outline-none"
+                                        >
+                                            <div className="p-3">
+                                                {/* Search input */}
+                                                <div className="relative mt-1 rounded-md shadow-sm">
+                                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                        <FaSearch className="h-3 w-3 text-gray-400" />
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="block w-full pl-8 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                                                        placeholder="Search extensions..."
+                                                        value={extensionSearch}
+                                                        onChange={(e) => setExtensionSearch(e.target.value)}
+                                                    />
+                                                </div>
+
+                                                {/* Dropdown items */}
+                                                <div className="mt-2 max-h-60 overflow-auto">
+                                                    {filteredExtension.length > 0 ? (
+                                                        filteredExtension.map((item) => (
+                                                            <motion.a
+                                                                key={item.id}
+                                                                className="cursor-pointer block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-all duration-200"
+                                                                onClick={() => {
+                                                                    setIsExtensionOpen(false);
+                                                                    router.push(item.href);
+                                                                }}
+                                                                whileHover={{ x: 4 }}
+                                                                whileTap={{ scale: 0.98 }}
+                                                            >
+                                                                {item.name}
+                                                            </motion.a>
+                                                        ))
+                                                    ) : (
+                                                        <div className="px-4 py-2 text-sm text-gray-400">No Extension found</div>
                                                     )}
                                                 </div>
                                             </div>
