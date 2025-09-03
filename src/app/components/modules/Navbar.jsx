@@ -107,7 +107,7 @@ const Navbar = () => {
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     Products
-                                    <div className='pl-1 pr-1'>
+                                    <div className='pl-1 pr-1 mt-1'>
                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                                             <path d="M4 6l4 4 4-4z" fill="currentColor" />
                                         </svg>
@@ -178,7 +178,7 @@ const Navbar = () => {
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     Test Project
-                                    <div className='pl-1 pr-1'>
+                                    <div className='pl-1 pr-1 mt-1'>
                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                                             <path d="M4 6l4 4 4-4z" fill="currentColor" />
                                         </svg>
@@ -249,6 +249,14 @@ const Navbar = () => {
                                 whileTap={{ scale: 0.95 }}
                             >
                                 Blog
+                            </motion.a>
+                            <motion.a
+                                href="#"
+                                className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50 transition-all duration-300 ease-in-out transform hover:scale-105"
+                                whileHover={{ y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Work
                             </motion.a>
                             <motion.a
                                 href="#"
