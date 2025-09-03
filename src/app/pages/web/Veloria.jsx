@@ -51,12 +51,12 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }) => {
 
   return (
     <div className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:bg-white/15 hover:scale-105 transition-all duration-300 group">
-        <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-emerald-200 hover:bg-white/95 hover:scale-105 hover:shadow-xl transition-all duration-300 group shadow-lg">
+        <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
           <Icon className="w-6 h-6 text-white" />
         </div>
-        <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-        <p className="text-white/70 text-sm leading-relaxed">{description}</p>
+        <h3 className="text-lg font-semibold text-emerald-900 mb-2">{title}</h3>
+        <p className="text-emerald-700 text-sm leading-relaxed">{description}</p>
       </div>
     </div>
   )
@@ -72,7 +72,7 @@ const FloatingIcon = ({ icon: Icon, className, delay = 0 }) => {
 
   return (
     <div className={`absolute ${className} transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-      <div className="bg-white/20 backdrop-blur-md rounded-full p-3 animate-bounce">
+      <div className="bg-emerald-500/90 backdrop-blur-md rounded-full p-3 animate-bounce shadow-xl">
         <Icon className="w-5 h-5 text-white" />
       </div>
     </div>
@@ -155,23 +155,23 @@ export default function VeloriaLanding() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-500 via-sky-500 to-emerald-600 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-emerald-50 to-emerald-100 overflow-hidden">
       {/* Navigation */}
-      <nav className="relative z-50 bg-white/10 backdrop-blur-lg border-b border-white/20">
+      <nav className="relative z-50 bg-emerald-600/95 backdrop-blur-lg border-b border-emerald-500/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-8 h-8 rounded-lg flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-white" />
+              <div className="bg-white w-8 h-8 rounded-lg flex items-center justify-center shadow-md">
+                <MessageSquare className="w-5 h-5 text-emerald-600" />
               </div>
               <span className="text-2xl font-bold text-white">Veloria</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-white/90 hover:text-white transition-colors">Features</a>
-              <a href="#security" className="text-white/90 hover:text-white transition-colors">Security</a>
-              <a href="#integrations" className="text-white/90 hover:text-white transition-colors">Integrations</a>
-              <button className="bg-white text-emerald-600 px-6 py-2 rounded-full font-medium hover:bg-white/90 transition-colors">
+              <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">Features</a>
+              <a href="#security" className="text-white/90 hover:text-white transition-colors font-medium">Security</a>
+              <a href="#integrations" className="text-white/90 hover:text-white transition-colors font-medium">Integrations</a>
+              <button className="bg-white text-emerald-600 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg">
                 Get Started
               </button>
             </div>
@@ -190,12 +190,12 @@ export default function VeloriaLanding() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/10 backdrop-blur-lg border-t border-white/20">
+          <div className="md:hidden bg-emerald-600/95 backdrop-blur-lg border-t border-emerald-500/50">
             <div className="px-4 py-4 space-y-3">
-              <a href="#features" className="block text-white/90 hover:text-white transition-colors">Features</a>
-              <a href="#security" className="block text-white/90 hover:text-white transition-colors">Security</a>
-              <a href="#integrations" className="block text-white/90 hover:text-white transition-colors">Integrations</a>
-              <button className="w-full bg-white text-emerald-600 px-6 py-2 rounded-full font-medium hover:bg-white/90 transition-colors">
+              <a href="#features" className="block text-white/90 hover:text-white transition-colors font-medium">Features</a>
+              <a href="#security" className="block text-white/90 hover:text-white transition-colors font-medium">Security</a>
+              <a href="#integrations" className="block text-white/90 hover:text-white transition-colors font-medium">Integrations</a>
+              <button className="w-full bg-white text-emerald-600 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 transition-colors">
                 Get Started
               </button>
             </div>
@@ -213,92 +213,86 @@ export default function VeloriaLanding() {
         <FloatingIcon icon={Heart} className="bottom-40 right-1/4" delay={1500} />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="mb-8 inline-flex items-center bg-white/10 backdrop-blur-lg rounded-full px-6 py-3 border border-white/20">
+          <div className="mb-8 inline-flex items-center bg-emerald-600/95 backdrop-blur-lg rounded-full px-6 py-3 border border-emerald-500 shadow-xl">
             <Star className="w-5 h-5 text-yellow-300 mr-2" />
-            <span className="text-white/90 text-sm">The Future of Communication is Here</span>
+            <span className="text-white text-sm font-semibold">The Future of Communication is Here</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-emerald-900 mb-6 leading-tight">
             Welcome to
-            <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
               Veloria
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-emerald-800 mb-8 leading-relaxed max-w-3xl mx-auto font-medium">
             The ultimate communication platform combining secure messaging, video calling, 
             real-time collaboration, and enterprise-grade features in one beautiful interface.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button className="group bg-white text-emerald-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all duration-300 flex items-center justify-center">
+            <button className="group bg-emerald-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-700 hover:scale-105 transition-all duration-300 flex items-center justify-center shadow-xl">
               Start Free Trial
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
+            <button className="group border-2 border-emerald-600 text-emerald-600 bg-white/50 px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-50 hover:scale-105 transition-all duration-300 flex items-center justify-center shadow-lg">
               <Play className="w-5 h-5 mr-2" />
               Watch Demo
             </button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                <AnimatedCounter end={10} suffix="M+" />
+                    {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-emerald-200 shadow-lg">
+              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">
+                <AnimatedCounter end={50} suffix="K+" />
               </div>
-              <div className="text-white/70">Active Users</div>
+              <div className="text-sm text-emerald-600 font-medium">Active Users</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+            <div className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-emerald-200 shadow-lg">
+              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">
                 <AnimatedCounter end={99} suffix="%" />
               </div>
-              <div className="text-white/70">Uptime</div>
+              <div className="text-sm text-emerald-600 font-medium">Uptime</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                <AnimatedCounter end={150} suffix="+" />
+            <div className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-emerald-200 shadow-lg">
+              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">
+                <AnimatedCounter end={4.9} suffix="" />
               </div>
-              <div className="text-white/70">Countries</div>
+              <div className="text-sm text-emerald-600 font-medium">Rating</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                <AnimatedCounter end={5} suffix="★" />
+            <div className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-emerald-200 shadow-lg">
+              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">
+                <AnimatedCounter end={128} suffix="" />
               </div>
-              <div className="text-white/70">App Rating</div>
+              <div className="text-sm text-emerald-600 font-medium">Countries</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <section id="features" className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Everything You Need to
-              <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                Stay Connected
-              </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
+              Advanced Communication Features
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Veloria brings together all the tools your team needs for seamless communication, 
-              collaboration, and productivity in one unified platform.
+            <p className="text-xl text-emerald-700 max-w-3xl mx-auto">
+              Everything you need for modern, secure, and efficient communication
             </p>
           </div>
 
           {/* Real-time Features */}
           <div className="mb-20">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-white">Real-time Features</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <h3 className="text-2xl md:text-3xl font-semibold text-emerald-800 mb-10 text-center flex items-center justify-center">
+              <Zap className="w-8 h-8 mr-3 text-emerald-600" />
+              Real-Time Communication
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {realTimeFeatures.map((feature, index) => (
-                <FeatureCard
-                  key={feature.title}
+                <FeatureCard 
+                  key={index}
                   icon={feature.icon}
                   title={feature.title}
                   description={feature.description}
@@ -308,43 +302,39 @@ export default function VeloriaLanding() {
             </div>
           </div>
 
-          {/* Media & File Sharing */}
+          {/* Media Features */}
           <div className="mb-20">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                <Upload className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-white">Media & File Sharing</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <h3 className="text-2xl md:text-3xl font-semibold text-emerald-800 mb-10 text-center flex items-center justify-center">
+              <Upload className="w-8 h-8 mr-3 text-emerald-600" />
+              Media & File Sharing
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {mediaFeatures.map((feature, index) => (
-                <FeatureCard
-                  key={feature.title}
+                <FeatureCard 
+                  key={index}
                   icon={feature.icon}
                   title={feature.title}
                   description={feature.description}
-                  delay={index * 100}
+                  delay={index * 100 + 200}
                 />
               ))}
             </div>
           </div>
 
-          {/* User Experience */}
+          {/* User Experience Features */}
           <div className="mb-20">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-white">User Experience</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <h3 className="text-2xl md:text-3xl font-semibold text-emerald-800 mb-10 text-center flex items-center justify-center">
+              <Star className="w-8 h-8 mr-3 text-emerald-600" />
+              Enhanced User Experience
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {userFeatures.map((feature, index) => (
-                <FeatureCard
-                  key={feature.title}
+                <FeatureCard 
+                  key={index}
                   icon={feature.icon}
                   title={feature.title}
                   description={feature.description}
-                  delay={index * 100}
+                  delay={index * 100 + 400}
                 />
               ))}
             </div>
@@ -353,91 +343,47 @@ export default function VeloriaLanding() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-20 bg-white/5 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="security" className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-50">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-6">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Enterprise-Grade
-              <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                Security & Privacy
-              </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
+              Enterprise-Grade Security
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Your conversations and data are protected by military-grade encryption 
-              and advanced privacy controls that put you in complete control.
+            <p className="text-xl text-emerald-700 max-w-3xl mx-auto">
+              Your conversations are protected with the highest security standards
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {securityFeatures.map((feature, index) => (
-              <FeatureCard
-                key={feature.title}
+              <FeatureCard 
+                key={index}
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
                 delay={index * 100}
               />
             ))}
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">256-bit Encryption</h4>
-                <p className="text-white/70">Military-grade AES-256 encryption protects every message</p>
-              </div>
-              <div>
-                <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Globe className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">GDPR Compliant</h4>
-                <p className="text-white/70">Full compliance with international privacy regulations</p>
-              </div>
-              <div>
-                <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">SOC 2 Certified</h4>
-                <p className="text-white/70">Independently audited security and availability</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Integrations Section */}
-      <section id="integrations" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="integrations" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-6">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center">
-                <Plug className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Powerful Integrations &
-              <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                Developer Tools
-              </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
+              Powerful Integrations
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Extend Veloria's capabilities with our comprehensive API, 
-              smart bots, and seamless third-party integrations.
+            <p className="text-xl text-emerald-700 max-w-3xl mx-auto">
+              Connect with your favorite tools and services
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {integrationFeatures.map((feature, index) => (
-              <FeatureCard
-                key={feature.title}
+              <FeatureCard 
+                key={index}
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
@@ -445,85 +391,122 @@ export default function VeloriaLanding() {
               />
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Advanced Group Features */}
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-emerald-400 to-sky-400 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-white">Advanced Group Features</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {groupFeatures.map((feature, index) => (
-                <FeatureCard
-                  key={feature.title}
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                  delay={index * 100}
-                />
-              ))}
-            </div>
+      {/* Group Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
+              Advanced Group Features
+            </h2>
+            <p className="text-xl text-emerald-700 max-w-3xl mx-auto">
+              Perfect for teams, communities, and organizations
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {groupFeatures.map((feature, index) => (
+              <FeatureCard 
+                key={index}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                delay={index * 100}
+              />
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white/10 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your
-            <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              Communication?
-            </span>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-emerald-800">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Communication?
           </h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Join millions of users who have already made the switch to Veloria. 
-            Start your free trial today and experience the future of communication.
+          <p className="text-xl text-emerald-100 mb-10 max-w-2xl mx-auto">
+            Join thousands of teams and individuals who trust Veloria for their daily communication needs.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button className="group bg-white text-emerald-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all duration-300 flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-emerald-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-xl">
               Start Free Trial
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
-              <Download className="w-5 h-5 mr-2" />
-              Download App
+            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 hover:scale-105 transition-all duration-300">
+              Schedule a Demo
             </button>
           </div>
-
-          <p className="text-white/60 text-sm">
-            No credit card required • 30-day free trial • Cancel anytime
+          <p className="text-emerald-200 mt-8 text-sm">
+            No credit card required • 14-day free trial • Cancel anytime
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="bg-gradient-to-br from-emerald-400 to-sky-400 w-8 h-8 rounded-lg flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-white" />
+      <footer className="bg-emerald-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-white w-8 h-8 rounded-lg flex items-center justify-center">
+                  <MessageSquare className="w-5 h-5 text-emerald-600" />
+                </div>
+                <span className="text-xl font-bold">Veloria</span>
               </div>
-              <span className="text-2xl font-bold text-white">Veloria</span>
+              <p className="text-emerald-300 mb-6">
+                The ultimate communication platform for teams and individuals.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
+                  <Globe className="w-5 h-5" />
+                </a>
+                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
+                  <MessageSquare className="w-5 h-5" />
+                </a>
+                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
+                  <Users className="w-5 h-5" />
+                </a>
+              </div>
             </div>
-            <div className="flex space-x-8">
-              <a href="#" className="text-white/70 hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">Terms</a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">Support</a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">Contact</a>
+            
+            <div>
+              <h3 className="font-semibold text-lg mb-6">Product</h3>
+              <ul className="space-y-3 text-emerald-300">
+                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Use Cases</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-lg mb-6">Company</h3>
+              <ul className="space-y-3 text-emerald-300">
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-lg mb-6">Resources</h3>
+              <ul className="space-y-3 text-emerald-300">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
+              </ul>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-white/20 text-center">
-            <p className="text-white/60">
-              © 2025 Veloria. All rights reserved. Built with ❤️ for seamless communication.
-            </p>
+          
+          <div className="border-t border-emerald-800 mt-12 pt-8 text-center text-emerald-400">
+            <p>© {new Date().getFullYear()} Veloria. All rights reserved.</p>
           </div>
         </div>
       </footer>
     </div>
   )
 }
+
