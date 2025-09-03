@@ -93,7 +93,7 @@ const Navbar = () => {
                         {/* Desktop navigation */}
                         <div className="hidden md:ml-6 md:flex md:items-center md:space-x-1">
                             <motion.a
-                                href="#"
+                                onClick={() => router.push('/about')}
                                 className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50 transition-all duration-300 ease-in-out transform hover:scale-105"
                                 whileHover={{ y: -2 }}
                                 whileTap={{ scale: 0.95 }}
