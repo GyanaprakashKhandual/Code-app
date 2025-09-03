@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCoffee, FaGithub, FaTimes, FaSearch, FaBook, FaSignInAlt, FaUserAlt } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const [isProductsOpen, setIsProductsOpen] = useState(false);
@@ -14,12 +15,19 @@ const Navbar = () => {
     const productsRef = useRef(null);
     const testProjectRef = useRef(null);
 
+    const router = useRouter();
+
     // Sample dropdown data
     const productsItems = [
-        { id: 1, name: 'Curacore', href: '#' },
-        { id: 2, name: 'Caffetest', href: '#' },
-        { id: 3, name: 'Brewmaster', href: '#' },
-        { id: 4, name: 'Beanmetrics', href: '#' },
+        { id: 1, name: 'Curacore', href: '/curacore' },
+        { id: 2, name: 'Caffetest', href: '/caffetest' },
+        { id: 3, name: 'Loventia', href: '/loventia' },
+        { id: 5, name: 'Rabbit', href: '/rabbit' },
+        { id: 6, name: 'Metronique', href: '/metronique' },
+        { id: 7, name: 'Arcanemart', href: '/arcanemart' },
+        { id: 8, name: 'Veloria', href: '/veloria' },
+        { id: 9, name: 'Calf', href: '/calf' },
+        { id: 10, name: 'Oneiro', href: '/oneiro' },
     ];
 
     const testProjectItems = [
@@ -137,9 +145,11 @@ const Navbar = () => {
                                                         filteredProducts.map((item) => (
                                                             <motion.a
                                                                 key={item.id}
-                                                                href={item.href}
-                                                                className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-all duration-200"
-                                                                onClick={() => setIsProductsOpen(false)}
+                                                                className="cursor-pointer block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-all duration-200"
+                                                                onClick={() => {
+                                                                    setIsProductsOpen(false);
+                                                                    router.push(item.href);
+                                                                }}
                                                                 whileHover={{ x: 4 }}
                                                                 whileTap={{ scale: 0.98 }}
                                                             >
