@@ -71,7 +71,7 @@ export default function RabbitHomePage() {
     >
       {/* Hero Section */}
       <motion.section
-        className="relative z-10 px-2 py-20 text-center"
+        className="relative z-10 px-2 py-5 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -110,7 +110,7 @@ export default function RabbitHomePage() {
 
       {/* Features Grid */}
       <motion.section
-        className="relative z-10 px-2 py-20"
+        className="relative z-10 px-2 py-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -149,7 +149,7 @@ export default function RabbitHomePage() {
 
       {/* Workflow Section */}
       <motion.section
-        className="relative z-10 px-2 py-20"
+        className="relative z-10 px-2 py-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -208,7 +208,7 @@ export default function RabbitHomePage() {
 
       {/* Performance Dashboard Mockup */}
       <motion.section
-        className="relative z-10 px-2 py-20"
+        className="relative z-10 px-2 py-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -280,7 +280,7 @@ export default function RabbitHomePage() {
 
       {/* Stats Section */}
       <motion.section
-        className="relative z-10 px-2 py-20"
+        className="relative z-10 px-2 py-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -314,7 +314,7 @@ export default function RabbitHomePage() {
 
       {/* CTA Section */}
       <motion.section
-        className="relative z-10 px-6 py-20"
+        className="relative z-10 px-6 py-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

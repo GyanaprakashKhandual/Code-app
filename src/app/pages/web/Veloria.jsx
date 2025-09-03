@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { 
-  MessageSquare, 
-  Video, 
-  Shield, 
-  Zap, 
-  Users, 
+import {
+  MessageSquare,
+  Video,
+  Shield,
+  Zap,
+  Users,
   FileText,
   Eye,
   Heart,
@@ -109,7 +109,7 @@ export default function VeloriaHomepage() {
   const [activeDemo, setActiveDemo] = useState('chat')
 
   const realTimeFeatures = [
-    { icon: Edit3, title: "Typing Indicators", description: "See when someone is composing a message in real-time" },
+    { icon: Edit3, title: "Typing Indicators", description: "See when someone is typing a message in real-time" },
     { icon: Eye, title: "Read Receipts", description: "Know exactly when your messages have been read" },
     { icon: Zap, title: "Online Status", description: "Real-time presence indicators for all users" },
     { icon: Heart, title: "Message Reactions", description: "Express yourself with emoji reactions" },
@@ -134,7 +134,7 @@ export default function VeloriaHomepage() {
 
   const securityFeatures = [
     { icon: Lock, title: "End-to-End Encryption", description: "Military-grade security for all messages" },
-    { icon: Timer, title: "Self-Destructing Messages", description: "Messages that disappear after reading" },
+    { icon: Timer, title: "Self-Destructing Messages", description: "Messages remove after read" },
     { icon: UserX, title: "Safety Controls", description: "Advanced blocking and reporting features" },
     { icon: Key, title: "Two-Factor Auth", description: "Enhanced account security protection" },
     { icon: Settings, title: "Privacy Controls", description: "Granular control over who can contact you" }
@@ -143,66 +143,19 @@ export default function VeloriaHomepage() {
   const integrationFeatures = [
     { icon: Bot, title: "Smart Chat Bots", description: "AI-powered automated assistants" },
     { icon: Plug, title: "Third-Party Integrations", description: "Connect with your favorite services" },
-    { icon: Code, title: "Developer API", description: "Build custom extensions and integrations" },
-    { icon: Webhook, title: "Webhooks", description: "Real-time notifications to external services" }
+    { icon: Code, title: "Developer API", description: "Build custom integrations" },
+    { icon: Webhook, title: "Webhooks", description: "Real-time notifications update" }
   ]
 
   const groupFeatures = [
     { icon: Hash, title: "Channel Categories", description: "Organize group chats into categories" },
-    { icon: Crown, title: "User Roles", description: "Advanced permissions and moderation tools" },
+    { icon: Crown, title: "User Roles", description: "Advanced permissions and privact" },
     { icon: Megaphone, title: "Announcement Channels", description: "Broadcast-only communication channels" },
     { icon: BarChart3, title: "Polls & Surveys", description: "Interactive group decision-making tools" }
   ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-emerald-50 to-emerald-100 overflow-hidden">
-      {/* Navigation */}
-      <nav className="relative z-50 bg-emerald-600/95 backdrop-blur-lg border-b border-emerald-500/50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="bg-white w-8 h-8 rounded-lg flex items-center justify-center shadow-md">
-                <MessageSquare className="w-5 h-5 text-emerald-600" />
-              </div>
-              <span className="text-2xl font-bold text-white">Veloria</span>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">Features</a>
-              <a href="#security" className="text-white/90 hover:text-white transition-colors font-medium">Security</a>
-              <a href="#integrations" className="text-white/90 hover:text-white transition-colors font-medium">Integrations</a>
-              <button className="bg-white text-emerald-600 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg">
-                Get Started
-              </button>
-            </div>
-
-            <button 
-              className="md:hidden text-white"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <div className="w-6 h-6 flex flex-col justify-center items-center">
-                <div className={`w-6 h-0.5 bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-0.5' : ''}`} />
-                <div className={`w-6 h-0.5 bg-white mt-1 transition-all ${isMenuOpen ? '-rotate-45 -translate-y-0.5' : ''}`} />
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-emerald-600/95 backdrop-blur-lg border-t border-emerald-500/50">
-            <div className="px-4 py-4 space-y-3">
-              <a href="#features" className="block text-white/90 hover:text-white transition-colors font-medium">Features</a>
-              <a href="#security" className="block text-white/90 hover:text-white transition-colors font-medium">Security</a>
-              <a href="#integrations" className="block text-white/90 hover:text-white transition-colors font-medium">Integrations</a>
-              <button className="w-full bg-white text-emerald-600 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 transition-colors">
-                Get Started
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
-
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <FloatingIcon icon={MessageSquare} className="top-20 left-10" delay={500} />
@@ -226,7 +179,7 @@ export default function VeloriaHomepage() {
           </h1>
 
           <p className="text-xl md:text-2xl text-emerald-800 mb-8 leading-relaxed max-w-3xl mx-auto font-medium">
-            The ultimate communication platform combining secure messaging, video calling, 
+            The ultimate communication platform combining secure messaging, video calling,
             real-time collaboration, and enterprise-grade features in one beautiful interface.
           </p>
 
@@ -241,7 +194,7 @@ export default function VeloriaHomepage() {
             </button>
           </div>
 
-                    {/* Stats */}
+          {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
             <div className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-emerald-200 shadow-lg">
               <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">
@@ -272,7 +225,7 @@ export default function VeloriaHomepage() {
       </div>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="features" className="py-5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
@@ -291,7 +244,7 @@ export default function VeloriaHomepage() {
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {realTimeFeatures.map((feature, index) => (
-                <FeatureCard 
+                <FeatureCard
                   key={index}
                   icon={feature.icon}
                   title={feature.title}
@@ -310,7 +263,7 @@ export default function VeloriaHomepage() {
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {mediaFeatures.map((feature, index) => (
-                <FeatureCard 
+                <FeatureCard
                   key={index}
                   icon={feature.icon}
                   title={feature.title}
@@ -329,7 +282,7 @@ export default function VeloriaHomepage() {
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {userFeatures.map((feature, index) => (
-                <FeatureCard 
+                <FeatureCard
                   key={index}
                   icon={feature.icon}
                   title={feature.title}
@@ -343,7 +296,7 @@ export default function VeloriaHomepage() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-50">
+      <section id="security" className="py-2 px-4 sm:px-6 lg:px-8 bg-emerald-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
@@ -356,7 +309,7 @@ export default function VeloriaHomepage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {securityFeatures.map((feature, index) => (
-              <FeatureCard 
+              <FeatureCard
                 key={index}
                 icon={feature.icon}
                 title={feature.title}
@@ -369,7 +322,7 @@ export default function VeloriaHomepage() {
       </section>
 
       {/* Integrations Section */}
-      <section id="integrations" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="integrations" className="py-5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
@@ -382,7 +335,7 @@ export default function VeloriaHomepage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {integrationFeatures.map((feature, index) => (
-              <FeatureCard 
+              <FeatureCard
                 key={index}
                 icon={feature.icon}
                 title={feature.title}
@@ -395,7 +348,7 @@ export default function VeloriaHomepage() {
       </section>
 
       {/* Group Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-50">
+      <section className="py-5 px-4 sm:px-6 lg:px-8 bg-emerald-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
@@ -408,7 +361,7 @@ export default function VeloriaHomepage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {groupFeatures.map((feature, index) => (
-              <FeatureCard 
+              <FeatureCard
                 key={index}
                 icon={feature.icon}
                 title={feature.title}
@@ -421,7 +374,7 @@ export default function VeloriaHomepage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-emerald-800">
+      <section className="py-5 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-emerald-800">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to Transform Your Communication?
@@ -442,70 +395,6 @@ export default function VeloriaHomepage() {
           </p>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-emerald-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-white w-8 h-8 rounded-lg flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5 text-emerald-600" />
-                </div>
-                <span className="text-xl font-bold">Veloria</span>
-              </div>
-              <p className="text-emerald-300 mb-6">
-                The ultimate communication platform for teams and individuals.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
-                  <Globe className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
-                  <MessageSquare className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-emerald-300 hover:text-white transition-colors">
-                  <Users className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Product</h3>
-              <ul className="space-y-3 text-emerald-300">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Use Cases</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Company</h3>
-              <ul className="space-y-3 text-emerald-300">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Resources</h3>
-              <ul className="space-y-3 text-emerald-300">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-emerald-800 mt-12 pt-8 text-center text-emerald-400">
-            <p>© {new Date().getFullYear()} Veloria. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
