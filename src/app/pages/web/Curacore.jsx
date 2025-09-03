@@ -1,16 +1,16 @@
 'use client'
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { 
-  Bug, 
-  Shield, 
-  Zap, 
-  BarChart3, 
-  Users, 
-  Filter, 
-  Grid3X3, 
-  MessageSquare, 
-  Table, 
+import {
+  Bug,
+  Shield,
+  Zap,
+  BarChart3,
+  Users,
+  Filter,
+  Grid3X3,
+  MessageSquare,
+  Table,
   CheckCircle,
   ArrowRight,
   Star,
@@ -118,75 +118,12 @@ const CuracoreHomePage = () => {
     <div className="min-h-screen bg-gradient-radial from-blue-50 via-lavender-50 to-sky-50 overflow-hidden">
       {/* Radial Background */}
       <div className="fixed inset-0 bg-gradient-radial from-blue-200/20 via-transparent to-sky-200/10 pointer-events-none" />
-      
-      {/* Navigation */}
-      <motion.nav 
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-blue-100"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <motion.div 
-              className="flex items-center space-x-2"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-sky-400 rounded-lg flex items-center justify-center">
-                <Bug className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-                Curacore
-              </span>
-            </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">Features</a>
-              <a href="#views" className="text-gray-700 hover:text-blue-600 transition-colors">Views</a>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">Pricing</a>
-              <motion.button 
-                className="bg-gradient-to-r from-blue-500 to-sky-400 text-white px-6 py-2 rounded-lg font-medium"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started
-              </motion.button>
-            </div>
-
-            {/* Mobile menu button */}
-            <button 
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <motion.div 
-            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-blue-100"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="px-4 py-4 space-y-4">
-              <a href="#features" className="block text-gray-700 hover:text-blue-600">Features</a>
-              <a href="#views" className="block text-gray-700 hover:text-blue-600">Views</a>
-              <a href="#pricing" className="block text-gray-700 hover:text-blue-600">Pricing</a>
-              <button className="w-full bg-gradient-to-r from-blue-500 to-sky-400 text-white px-6 py-2 rounded-lg font-medium">
-                Get Started
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-12 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center"
             variants={containerVariants}
             initial="hidden"
@@ -197,9 +134,15 @@ const CuracoreHomePage = () => {
                 <Zap className="w-4 h-4 mr-2" />
                 Lite Version of JIRA
               </span>
+              <motion.h1
+                variants={itemVariants}
+                className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-700 via-sky-500 to-purple-900 bg-clip-text text-transparent leading-tight"
+              >
+                Curacore
+              </motion.h1>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               variants={itemVariants}
               className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-sky-500 to-blue-700 bg-clip-text text-transparent leading-tight"
             >
@@ -208,19 +151,19 @@ const CuracoreHomePage = () => {
               <span className="text-4xl md:text-6xl">Made Simple</span>
             </motion.h1>
 
-            <motion.p 
+            <motion.p
               variants={itemVariants}
               className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed"
             >
-              Curacore is the lightweight, user-friendly bug tracking solution that gives you the power of JIRA 
+              Curacore is the lightweight, user-friendly bug tracking solution that gives you the power of JIRA
               without the complexity. Track, manage, and resolve issues with ease.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12"
             >
-              <motion.button 
+              <motion.button
                 className="bg-gradient-to-r from-blue-500 to-sky-400 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center shadow-lg hover:shadow-xl transition-shadow"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -228,8 +171,8 @@ const CuracoreHomePage = () => {
                 Start Free Trial
                 <ArrowRight className="w-5 h-5 ml-2" />
               </motion.button>
-              
-              <motion.button 
+
+              <motion.button
                 className="bg-white/80 backdrop-blur text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg flex items-center border border-blue-200 hover:bg-white transition-colors"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -240,12 +183,12 @@ const CuracoreHomePage = () => {
             </motion.div>
 
             {/* Hero Stats */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto"
             >
               {stats.map((stat, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className="text-center"
                   whileHover={{ scale: 1.1 }}
@@ -258,11 +201,11 @@ const CuracoreHomePage = () => {
           </motion.div>
 
           {/* Floating Elements */}
-          <motion.div 
+          <motion.div
             className="absolute top-20 left-10 w-20 h-20 bg-blue-200/30 rounded-full blur-xl"
             style={{ y: y1 }}
           />
-          <motion.div 
+          <motion.div
             className="absolute top-40 right-20 w-32 h-32 bg-sky-200/20 rounded-full blur-2xl"
             style={{ y: y2 }}
           />
@@ -272,7 +215,7 @@ const CuracoreHomePage = () => {
       {/* Features Section */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -286,7 +229,7 @@ const CuracoreHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -314,7 +257,7 @@ const CuracoreHomePage = () => {
       {/* View Options Section */}
       <section id="views" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -328,7 +271,7 @@ const CuracoreHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid lg:grid-cols-3 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -356,7 +299,7 @@ const CuracoreHomePage = () => {
       {/* Dashboard Preview Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -370,7 +313,7 @@ const CuracoreHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bg-white/80 backdrop-blur rounded-3xl p-8 border border-blue-100 shadow-xl"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -384,7 +327,7 @@ const CuracoreHomePage = () => {
                 { icon: Clock, label: "In Progress", value: "12", color: "text-yellow-500" },
                 { icon: Users, label: "Team Members", value: "8", color: "text-blue-500" }
               ].map((item, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className="bg-white rounded-xl p-6 border border-blue-100"
                   whileHover={{ scale: 1.05 }}
@@ -397,7 +340,7 @@ const CuracoreHomePage = () => {
                 </motion.div>
               ))}
             </div>
-            
+
             <div className="h-40 bg-gradient-to-r from-blue-100 to-sky-100 rounded-xl flex items-center justify-center">
               <p className="text-gray-600 text-lg">Interactive Chart Preview</p>
             </div>
@@ -419,7 +362,7 @@ const CuracoreHomePage = () => {
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Join thousands of teams who've simplified their workflow with Curacore
             </p>
-            <motion.button 
+            <motion.button
               className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-xl hover:bg-blue-50 transition-colors shadow-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -429,28 +372,6 @@ const CuracoreHomePage = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-sky-400 rounded-lg flex items-center justify-center">
-                <Bug className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">Curacore</span>
-            </div>
-            <div className="flex space-x-6">
-              <a href="#" className="hover:text-blue-400 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Terms</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Support</a>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Curacore. All rights reserved. The lite version of JIRA for modern teams.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
