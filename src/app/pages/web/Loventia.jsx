@@ -1,12 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { 
-  Heart, 
-  ArrowLeftRight, 
-  Users, 
-  MessageCircle, 
-  Video, 
+import {
+  Heart,
+  ArrowLeftRight,
+  Users,
+  MessageCircle,
+  Video,
   Briefcase,
   BookOpen,
   GraduationCap,
@@ -129,7 +129,7 @@ const LoventiaHomePage = () => {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-pink-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse" />
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-br from-indigo-300/30 to-purple-300/30 rounded-full blur-2xl"
           animate={{
             scale: [1, 1.2, 1],
@@ -139,75 +139,10 @@ const LoventiaHomePage = () => {
         />
       </div>
 
-      {/* Navigation */}
-      <motion.nav 
-        className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-pink-100"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <motion.div 
-              className="flex items-center space-x-3"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="w-10 h-10 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                Loventia
-              </span>
-            </motion.div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-pink-600 transition-colors font-medium">Features</a>
-              <a href="#how-it-works" className="text-gray-700 hover:text-pink-600 transition-colors font-medium">How It Works</a>
-              <a href="#community" className="text-gray-700 hover:text-pink-600 transition-colors font-medium">Community</a>
-              <motion.button 
-                className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-6 py-2 rounded-xl font-semibold shadow-lg"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Join Free
-              </motion.button>
-            </div>
-
-            <button 
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div 
-              className="md:hidden bg-white/95 backdrop-blur-xl border-t border-pink-100"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-            >
-              <div className="px-4 py-6 space-y-4">
-                <a href="#features" className="block text-gray-700 hover:text-pink-600 font-medium">Features</a>
-                <a href="#how-it-works" className="block text-gray-700 hover:text-pink-600 font-medium">How It Works</a>
-                <a href="#community" className="block text-gray-700 hover:text-pink-600 font-medium">Community</a>
-                <button className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold">
-                  Join Free
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
-
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center"
             variants={containerVariants}
             initial="hidden"
@@ -220,7 +155,7 @@ const LoventiaHomePage = () => {
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               variants={itemVariants}
               className="text-5xl md:text-8xl font-black mb-8 leading-tight"
             >
@@ -229,23 +164,23 @@ const LoventiaHomePage = () => {
               </span>
               <br />
               <span className="bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                Connect.
+                Connect. With Loventia
               </span>
             </motion.h1>
 
-            <motion.p 
+            <motion.p
               variants={itemVariants}
               className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
-              The revolutionary social platform where skills meet passion. Swap your expertise, learn from others, 
+              The revolutionary social platform where skills meet passion. Swap your expertise, learn from others,
               and build meaningful connections in a community that grows together.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-16"
             >
-              <motion.button 
+              <motion.button
                 className="group bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
@@ -253,8 +188,8 @@ const LoventiaHomePage = () => {
                 Start Skill Swapping
                 <ArrowRight className="w-6 h-6 ml-3 inline-block group-hover:translate-x-1 transition-transform" />
               </motion.button>
-              
-              <motion.button 
+
+              <motion.button
                 className="group bg-white/80 backdrop-blur text-gray-700 px-10 py-5 rounded-2xl font-bold text-xl flex items-center border-2 border-pink-200 hover:border-pink-300 hover:bg-white transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
@@ -265,12 +200,12 @@ const LoventiaHomePage = () => {
             </motion.div>
 
             {/* Hero Stats */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
             >
               {stats.map((stat, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className="bg-white/70 backdrop-blur rounded-2xl p-6 border border-pink-100 shadow-lg"
                   whileHover={{ scale: 1.1, y: -5 }}
@@ -286,19 +221,19 @@ const LoventiaHomePage = () => {
           </motion.div>
 
           {/* Floating Elements */}
-          <motion.div 
+          <motion.div
             className="absolute top-32 left-10 w-24 h-24 bg-pink-300/30 rounded-full blur-xl"
             style={{ y: y1 }}
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
-          <motion.div 
+          <motion.div
             className="absolute top-40 right-16 w-32 h-32 bg-purple-300/20 rounded-full blur-2xl"
             style={{ y: y2 }}
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
           />
-          <motion.div 
+          <motion.div
             className="absolute bottom-20 left-1/4 w-20 h-20 bg-indigo-300/25 rounded-full blur-xl"
             style={{ y: y3 }}
             animate={{ rotate: -360 }}
@@ -310,7 +245,7 @@ const LoventiaHomePage = () => {
       {/* How It Works */}
       <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/40 backdrop-blur">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -324,7 +259,7 @@ const LoventiaHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-3 gap-12"
             variants={containerVariants}
             initial="hidden"
@@ -361,7 +296,7 @@ const LoventiaHomePage = () => {
                 whileHover={{ y: -10 }}
               >
                 <div className="relative mb-8">
-                  <motion.div 
+                  <motion.div
                     className={`w-24 h-24 bg-gradient-to-br ${item.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:shadow-pink-500/25 transition-all duration-300`}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
@@ -382,7 +317,7 @@ const LoventiaHomePage = () => {
       {/* Core Features */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -398,7 +333,7 @@ const LoventiaHomePage = () => {
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Feature Showcase */}
-            <motion.div 
+            <motion.div
               className="space-y-6"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -407,11 +342,10 @@ const LoventiaHomePage = () => {
               {coreFeatures.map((feature, index) => (
                 <motion.div
                   key={index}
-                  className={`p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
-                    activeFeature === index
+                  className={`p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer ${activeFeature === index
                       ? 'bg-white border-pink-300 shadow-xl'
                       : 'bg-white/50 border-transparent hover:border-pink-200 hover:bg-white/70'
-                  }`}
+                    }`}
                   onClick={() => setActiveFeature(index)}
                   whileHover={{ scale: 1.02 }}
                 >
@@ -429,7 +363,7 @@ const LoventiaHomePage = () => {
             </motion.div>
 
             {/* Visual Demo */}
-            <motion.div 
+            <motion.div
               className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl p-8 border border-pink-200"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -467,7 +401,7 @@ const LoventiaHomePage = () => {
       {/* Social Integration */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 to-purple-50">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -481,7 +415,7 @@ const LoventiaHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -509,7 +443,7 @@ const LoventiaHomePage = () => {
       {/* Skill Categories */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -523,7 +457,7 @@ const LoventiaHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="flex flex-wrap justify-center gap-4"
             variants={containerVariants}
             initial="hidden"
@@ -555,7 +489,7 @@ const LoventiaHomePage = () => {
       {/* Community Section */}
       <section id="community" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-pink-50 to-purple-50">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -569,7 +503,7 @@ const LoventiaHomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-3 gap-8 mb-16"
             variants={containerVariants}
             initial="hidden"
@@ -623,7 +557,7 @@ const LoventiaHomePage = () => {
         </div>
       </section>
 
-            {/* CTA Section */}
+      {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
@@ -637,9 +571,9 @@ const LoventiaHomePage = () => {
             <p className="text-xl text-pink-100 max-w-3xl mx-auto mb-10">
               Join thousands of learners and start your skill exchange journey today
             </p>
-            
+
             <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-              <motion.button 
+              <motion.button
                 className="group bg-white text-pink-600 px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:bg-gray-50 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
@@ -647,8 +581,8 @@ const LoventiaHomePage = () => {
                 Get Started Free
                 <ArrowRight className="w-6 h-6 ml-3 inline-block group-hover:translate-x-1 transition-transform" />
               </motion.button>
-              
-              <motion.button 
+
+              <motion.button
                 className="group bg-transparent border-2 border-white text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
@@ -657,80 +591,13 @@ const LoventiaHomePage = () => {
                 Watch Demo
               </motion.button>
             </motion.div>
-            
+
             <p className="text-pink-200 mt-8 text-sm">
               No credit card required • Join in seconds • Cancel anytime
             </p>
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold">Loventia</span>
-              </div>
-              <p className="text-gray-400 mb-6">
-                The social platform where skills meet passion and everyone grows together.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Facebook className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Product</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                               <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Company</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-lg mb-6">Support</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} Loventia. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
