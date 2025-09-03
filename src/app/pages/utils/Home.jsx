@@ -22,7 +22,7 @@ import {
     X
 } from 'lucide-react';
 
-const LyraLandingPage = () => {
+const HomePage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const products = [
@@ -510,4 +510,4 @@ const LyraLandingPage = () => {
     );
 };
 
-export default LyraLandingPage;
+export default HomePage;

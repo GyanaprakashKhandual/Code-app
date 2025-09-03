@@ -1,11 +1,8 @@
-import LyraLandingPage from "./pages/utils/Home";
-
-
-
+import HomePage from "./pages/utils/Home";
 export default function Home() {
-  return(
+  return (
     <div>
-     <LyraLandingPage/>
+      <HomePage />
     </div>
   )
 }
