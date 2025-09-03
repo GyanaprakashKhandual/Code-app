@@ -36,7 +36,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-const LoventiaLanding = () => {
+const LoventiaHomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
   const { scrollY } = useScroll();
@@ -735,4 +735,4 @@ const LoventiaLanding = () => {
   );
 };
 
-export default LoventiaLanding;
+export default LoventiaHomePage;

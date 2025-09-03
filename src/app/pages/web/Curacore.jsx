@@ -23,7 +23,7 @@ import {
   Clock
 } from 'lucide-react';
 
-const CuracoreLanding = () => {
+const CuracoreHomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 300], [0, -50]);
@@ -455,4 +455,4 @@ const CuracoreLanding = () => {
   );
 };
 
-export default CuracoreLanding;
+export default CuracoreHomePage;

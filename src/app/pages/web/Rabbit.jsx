@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart3, Code, Zap, Eye, MessageSquare, FolderOpen, Activity, Github, ExternalLink } from 'lucide-react'
 
-export default function RabbitLandingPage() {
+export default function RabbitHomePage() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

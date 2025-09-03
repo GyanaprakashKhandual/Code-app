@@ -88,7 +88,7 @@ const FloatingElements = () => (
   </div>
 );
 
-export default function DooDotLanding() {
+export default function DooDotHomePage() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

@@ -24,7 +24,7 @@ import {
   PieChart
 } from 'lucide-react';
 
-const MetroniqueLanding = () => {
+const MetroniqueHomePage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -523,4 +523,4 @@ const MetroniqueLanding = () => {
   );
 };
 
-export default MetroniqueLanding;
+export default MetroniqueHomePage;

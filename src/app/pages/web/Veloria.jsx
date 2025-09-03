@@ -104,7 +104,7 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "" }) => {
   )
 }
 
-export default function VeloriaLanding() {
+export default function VeloriaHomepage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDemo, setActiveDemo] = useState('chat')
 
