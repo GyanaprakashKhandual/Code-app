@@ -98,7 +98,7 @@ export default function DooDotHomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       <FloatingElements />
-      
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -118,14 +118,14 @@ export default function DooDotHomePage() {
                 DooDot
               </span>
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed"
             >
-              The ultimate productivity powerhouse that transforms chaos into clarity. 
+              The ultimate productivity powerhouse that transforms chaos into clarity.
               Organize by work type, manage sub-todos, and stay connected with intelligent notifications.
             </motion.p>
 
@@ -160,11 +160,11 @@ export default function DooDotHomePage() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/40 to-purple-600/40 rounded-3xl blur-3xl scale-110"></div>
               <div className="absolute inset-0 bg-gradient-to-tl from-pink-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
               <motion.img
-                animate={{ 
+                animate={{
                   rotateY: [0, -5, 5, 0],
                   rotateX: [0, 2, -2, 0],
                 }}
-                transition={{ 
+                transition={{
                   duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -339,7 +339,7 @@ export default function DooDotHomePage() {
                 <div className="text-gray-300">Avg. Task Time</div>
               </div>
             </div>
-            
+
             <div className="h-48 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center">
               <motion.div
                 animate={{ rotate: 360 }}
@@ -441,7 +441,7 @@ export default function DooDotHomePage() {
           >
             Ready to Transform Your Productivity?
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -504,7 +504,7 @@ export default function DooDotHomePage() {
           }}
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl"
         ></motion.div>
-        
+
         <motion.div
           animate={{
             scale: [1.2, 1, 1.2],
