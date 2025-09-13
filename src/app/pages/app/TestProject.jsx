@@ -1,277 +1,288 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { 
   ExternalLink, 
   Github, 
   Clock, 
   Bug, 
-  TestTube, 
-  Star,
-  ChevronDown,
-  ChevronUp,
+  Code, 
+  TestTube,
   User,
   MessageSquare,
-  Loader2,
-  AlertCircle
-} from 'lucide-react'
+  ChevronDown,
+  ChevronUp
+} from 'lucide-react';
 
 const ProjectCard = () => {
-  const [projects, setProjects] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [expandedCards, setExpandedCards] = useState({})
+  // Demo data as default
+  const demoData = {
+    projectName: "Automation on E-commerce",
+    appName: "Pioneers Wine",
+    appLink: "https://pioneers.vercel.app",
+    testMethod: "Automation Testing",
+    testTypes: [
+      { "Functional Testing": "Selenium" },
+      { "API Testing": "Rest Assured" },
+      { "Performance Testing": "Grafana" },
+      { "UI Testing": "Manual Testing" },
+      { "Reports": "Extent Reports" },
+      { "Languages": "Java, JavaScript, Gherkin" },
+      { "Bug Reporting": "Custom Real-Time Reports" },
+      { "Documentation": "Notion + Google Docs" }
+    ],
+    totalHours: "36.4 Hours",
+    totalBugs: "98",
+    testDescription: "This project involved testing a complete e-commerce application using Cucumber with Page Object Model (POM). I integrated custom reporting tools and executed end-to-end functional, API, performance, and UI testing. The project successfully uncovered 98 critical bugs that were affecting product performance and customer experience.",
+    feedback: "Thank you so much, Chris! This was my hobby project, and you helped transform it into a reliable testing framework. With your detailed bug reports and requirement suggestions, I can now elevate this application to a production-level service.",
+    feedbackFrom: "Subham Diwedi",
+    gitHubRepo: "https://github.com/GyanaprakashKhandual/Pioneers-Wine-Automation-Test"
+  };
+
+  const [projectData, setProjectData] = useState(demoData);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [expandedSection, setExpandedSection] = useState(null);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchProject = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/project/test')
-        if (!response.ok) {
-          throw new Error('Failed to fetch projects')
+        setLoading(true);
+        const response = await fetch('http://localhost:5000/api/v1/project/test');
+        if (response.ok) {
+          const data = await response.json();
+          setProjectData(data.projects[0]);
         }
-        const data = await response.json()
-        setProjects(data.projects || [])
+        // If API fails, keep demo data
       } catch (err) {
-        setError(err.message)
+        // Keep demo data if API fails
+        console.log('API not available, using demo data');
       } finally {
-        setLoading(false)
+        setLoading(false);
+      }
+    };
+
+    // Try to fetch from API, but don't block rendering
+    fetchProject();
+  }, []);
+
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8,
+        ease: "easeOut"
       }
     }
+  };
 
-    fetchProjects()
-  }, [])
-
-  const toggleExpanded = (index) => {
-    setExpandedCards(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }))
-  }
-
-  const getTestTypeIcon = (type) => {
-    const icons = {
-      'Functional Testing': '🧪',
-      'API Testing': '🔗',
-      'Performance Testing': '⚡',
-      'UI Testing': '🎨',
-      'Reports': '📊',
-      'Languages': '💻',
-      'Bug Reporting': '🐛',
-      'Documentation': '📋'
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.5 }
     }
-    return icons[type] || '🔧'
-  }
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <motion.div 
+      <div className="min-h-screen bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 flex items-center justify-center p-4">
+        <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="flex items-center space-x-2 text-blue-600"
-        >
-          <Loader2 className="w-8 h-8" />
-          <span className="text-lg font-medium">Loading Projects...</span>
-        </motion.div>
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-amber-300 border-t-transparent rounded-full"
+        />
       </div>
-    )
+    );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-lg p-8 max-w-md text-center"
-        >
-          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">Error Loading Projects</h3>
-          <p className="text-gray-600">{error}</p>
-        </motion.div>
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex items-center justify-center p-4">
+        <div className="text-red-500 text-center">
+          <Bug className="w-12 h-12 mx-auto mb-4" />
+          <p className="text-lg">Error: {error}</p>
+        </div>
       </div>
-    )
+    );
   }
 
+  if (!projectData) return null;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Testing Projects Dashboard</h1>
-          <p className="text-gray-600">Comprehensive testing solutions and results</p>
-        </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex items-center justify-center p-4">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full min-w-[45vw] max-w-[45vw] aspect-square"
+      >
+        <div className="h-full backdrop-blur-lg bg-white/30 border border-white/40 rounded-3xl shadow-2xl p-8 overflow-y-auto">
+          {/* Header */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">{projectData.projectName}</h1>
+            <div className="flex items-center gap-4 text-sm text-gray-600">
+              <span className="bg-white/40 px-3 py-1 rounded-full">{projectData.appName}</span>
+              <span className="bg-amber-100/60 px-3 py-1 rounded-full">{projectData.testMethod}</span>
+            </div>
+          </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
+          {/* Stats */}
+          <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4 mb-6">
+            <div className="bg-white/40 rounded-2xl p-4 text-center">
+              <Clock className="w-6 h-6 text-amber-600 mx-auto mb-2" />
+              <div className="text-lg font-semibold text-gray-800">{projectData.totalHours}</div>
+              <div className="text-xs text-gray-600">Total Hours</div>
+            </div>
+            <div className="bg-white/40 rounded-2xl p-4 text-center">
+              <Bug className="w-6 h-6 text-red-500 mx-auto mb-2" />
+              <div className="text-lg font-semibold text-gray-800">{projectData.totalBugs}</div>
+              <div className="text-xs text-gray-600">Bugs Found</div>
+            </div>
+          </motion.div>
+
+          {/* Test Types */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <button
+              onClick={() => toggleSection('testTypes')}
+              className="w-full flex items-center justify-between bg-white/40 rounded-2xl p-4 mb-3 hover:bg-white/50 transition-all duration-300"
             >
-              {/* Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
-                <motion.h2 
-                  className="text-2xl font-bold mb-2"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  {project.projectName}
-                </motion.h2>
-                <p className="text-blue-100 text-lg">{project.appName}</p>
+              <div className="flex items-center gap-2">
+                <TestTube className="w-5 h-5 text-blue-600" />
+                <span className="font-semibold text-gray-800">Test Types</span>
               </div>
-
-              {/* Stats Section */}
-              <div className="p-6 bg-gray-50 border-b">
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white rounded-lg p-4 shadow-sm"
-                  >
-                    <Clock className="w-6 h-6 text-blue-500 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Total Hours</p>
-                    <p className="text-xl font-bold text-gray-800">{project.totalHours}</p>
-                  </motion.div>
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white rounded-lg p-4 shadow-sm"
-                  >
-                    <Bug className="w-6 h-6 text-red-500 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Bugs Found</p>
-                    <p className="text-xl font-bold text-gray-800">{project.totalBugs}</p>
-                  </motion.div>
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white rounded-lg p-4 shadow-sm"
-                  >
-                    <TestTube className="w-6 h-6 text-green-500 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Test Method</p>
-                    <p className="text-sm font-semibold text-gray-800">{project.testMethod}</p>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                {/* Test Types */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                    <TestTube className="w-5 h-5 mr-2 text-blue-500" />
-                    Testing Technologies
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {project.testTypes.map((testType, typeIndex) => {
-                      const [key, value] = Object.entries(testType)[0]
-                      return (
-                        <motion.div
-                          key={typeIndex}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: typeIndex * 0.1 }}
-                          className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-3 border border-blue-100"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <span className="text-lg">{getTestTypeIcon(key)}</span>
-                            <div>
-                              <p className="text-sm font-medium text-gray-800">{key}</p>
-                              <p className="text-xs text-gray-600">{value}</p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="mb-6"
-                >
-                  <button
-                    onClick={() => toggleExpanded(index)}
-                    className="flex items-center justify-between w-full text-left mb-3 hover:text-blue-600 transition-colors"
-                  >
-                    <h3 className="text-lg font-semibold text-gray-800">Project Description</h3>
-                    {expandedCards[index] ? 
-                      <ChevronUp className="w-5 h-5" /> : 
-                      <ChevronDown className="w-5 h-5" />
-                    }
-                  </button>
-                  <AnimatePresence>
-                    {expandedCards[index] && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-gray-600 leading-relaxed">{project.testDescription}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-
-                {/* Feedback Section */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-green-50 rounded-lg p-4 mb-6 border border-green-100"
-                >
-                  <div className="flex items-start space-x-3">
-                    <MessageSquare className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm text-gray-700 italic mb-2">"{project.feedback}"</p>
-                      <div className="flex items-center space-x-2">
-                        <User className="w-4 h-4 text-green-600" />
-                        <span className="text-sm font-medium text-green-800">{project.feedbackFrom}</span>
-                      </div>
+              {expandedSection === 'testTypes' ? 
+                <ChevronUp className="w-5 h-5" /> : 
+                <ChevronDown className="w-5 h-5" />
+              }
+            </button>
+            
+            <motion.div
+              initial={false}
+              animate={{
+                height: expandedSection === 'testTypes' ? 'auto' : 0,
+                opacity: expandedSection === 'testTypes' ? 1 : 0
+              }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="grid grid-cols-1 gap-2 pl-4">
+                {projectData.testTypes.map((testType, index) => {
+                  const [key, value] = Object.entries(testType)[0];
+                  return (
+                    <div key={index} className="bg-white/30 rounded-lg p-3 flex justify-between">
+                      <span className="text-sm font-medium text-gray-700">{key}</span>
+                      <span className="text-sm text-gray-600">{value}</span>
                     </div>
-                  </div>
-                </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </motion.div>
 
-                {/* Links */}
-                <div className="flex space-x-3">
-                  <motion.a
-                    href={project.appLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex-1 justify-center"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>View App</span>
-                  </motion.a>
-                  <motion.a
-                    href={project.gitHubRepo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors flex-1 justify-center"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>View Code</span>
-                  </motion.a>
+          {/* Description */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <button
+              onClick={() => toggleSection('description')}
+              className="w-full flex items-center justify-between bg-white/40 rounded-2xl p-4 mb-3 hover:bg-white/50 transition-all duration-300"
+            >
+              <div className="flex items-center gap-2">
+                <Code className="w-5 h-5 text-green-600" />
+                <span className="font-semibold text-gray-800">Description</span>
+              </div>
+              {expandedSection === 'description' ? 
+                <ChevronUp className="w-5 h-5" /> : 
+                <ChevronDown className="w-5 h-5" />
+              }
+            </button>
+            
+            <motion.div
+              initial={false}
+              animate={{
+                height: expandedSection === 'description' ? 'auto' : 0,
+                opacity: expandedSection === 'description' ? 1 : 0
+              }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <p className="text-sm text-gray-700 leading-relaxed pl-4 bg-white/30 rounded-lg p-4">
+                {projectData.testDescription}
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Feedback */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <button
+              onClick={() => toggleSection('feedback')}
+              className="w-full flex items-center justify-between bg-white/40 rounded-2xl p-4 mb-3 hover:bg-white/50 transition-all duration-300"
+            >
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-purple-600" />
+                <span className="font-semibold text-gray-800">Client Feedback</span>
+              </div>
+              {expandedSection === 'feedback' ? 
+                <ChevronUp className="w-5 h-5" /> : 
+                <ChevronDown className="w-5 h-5" />
+              }
+            </button>
+            
+            <motion.div
+              initial={false}
+              animate={{
+                height: expandedSection === 'feedback' ? 'auto' : 0,
+                opacity: expandedSection === 'feedback' ? 1 : 0
+              }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="pl-4 bg-white/30 rounded-lg p-4">
+                <p className="text-sm text-gray-700 italic mb-2">"{projectData.feedback}"</p>
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4 text-gray-500" />
+                  <span className="text-xs text-gray-600">- {projectData.feedbackFrom}</span>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
+          </motion.div>
 
-export default ProjectCard
+          {/* Links */}
+          <motion.div variants={itemVariants} className="flex gap-3">
+            <motion.a
+              href={projectData.appLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl p-4 flex items-center justify-center gap-2 hover:from-blue-600 hover:to-blue-700 transition-all duration-300"
+            >
+              <ExternalLink className="w-5 h-5" />
+              <span className="text-sm font-medium">Live App</span>
+            </motion.a>
+            <motion.a
+              href={projectData.gitHubRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex-1 bg-gradient-to-r from-gray-700 to-gray-800 text-white rounded-2xl p-4 flex items-center justify-center gap-2 hover:from-gray-800 hover:to-gray-900 transition-all duration-300"
+            >
+              <Github className="w-5 h-5" />
+              <span className="text-sm font-medium">GitHub</span>
+            </motion.a>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default ProjectCard;
