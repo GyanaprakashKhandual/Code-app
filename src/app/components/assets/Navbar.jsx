@@ -100,9 +100,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-blue-50 via-white to-sky-50 border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <nav className="bg-gradient-to-r from-blue-50 via-white to-sky-50 
+                  border-b border-gray-200 sticky top-0 z-50 flex-shrink-0">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <FaCoffee className="h-8 w-8 text-blue-900" />
@@ -223,7 +224,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsProductsOpen(false)}
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              className="fixed inset-0"
             />
 
             {/* Modal */}
