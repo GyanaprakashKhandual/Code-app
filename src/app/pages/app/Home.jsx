@@ -1,647 +1,513 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { 
-  Shield, 
-  Code, 
-  Smartphone, 
-  Zap, 
-  ChevronRight, 
-  Menu, 
-  X,
-  Bug,
-  BarChart3,
-  Coffee,
-  FolderKanban,
-  CheckSquare,
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
+import {
+  Code,
+  Smartphone,
+  Shield,
+  CheckCircle,
   Users,
-  ShoppingBag,
-  Video,
-  MessageSquare,
   Star,
-  ArrowRight,
-  Sparkles
-} from 'lucide-react'
+  Github,
+  Globe,
+  Database,
+  Zap,
+  Brain,
+  Calendar,
+  Bug,
+  TestTube,
+  ShoppingCart,
+  MessageSquare,
+  Camera,
+  Cloud,
+  Eye,
+  ChevronRight,
+  Menu,
+  X
+} from 'lucide-react';
 
-const Nexly = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+const AnimatedCounter = ({ end, duration = 2 }) => {
+  const [count, setCount] = useState(0);
+  const controls = useAnimation();
+  const ref = React.useRef(null);
+  const inView = useInView(ref);
 
-  const products = [
+  useEffect(() => {
+    if (inView) {
+      const timer = setInterval(() => {
+        setCount(prev => {
+          if (prev >= end) {
+            clearInterval(timer);
+            return end;
+          }
+          return prev + Math.ceil(end / (duration * 30));
+        });
+      }, 1000 / 30);
+      return () => clearInterval(timer);
+    }
+  }, [inView, end, duration]);
+
+  return <span ref={ref}>{count > end ? end : count}</span>;
+};
+
+const ProjectCard = ({ project, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
+    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-blue-50 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-blue-100"
+  >
+    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-200 to-green-200 rounded-bl-full opacity-20"></div>
+
+    <div className="relative z-10">
+      <div className="flex items-center justify-between mb-4">
+        <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500 to-green-500 text-white">
+          {project.icon}
+        </div>
+        <span className={`px-3 py-1 rounded-full text-xs font-medium ${project.level === 'Basic' ? 'bg-green-100 text-green-700' :
+            project.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
+              project.level === 'Advanced' ? 'bg-purple-100 text-purple-700' :
+                'bg-red-100 text-red-700'
+          }`}>
+          {project.level}
+        </span>
+      </div>
+
+      <h3 className="text-xl font-bold text-gray-800 mb-3">{project.name}</h3>
+      <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.features.map((feature, i) => (
+          <span key={i} className="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-md">
+            {feature}
+          </span>
+        ))}
+      </div>
+
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="flex items-center gap-2 text-blue-600 font-medium hover:text-blue-700 transition-colors"
+      >
+        View Details <ChevronRight size={16} />
+      </motion.button>
+    </div>
+  </motion.div>
+);
+
+const ExtensionCard = ({ extension, index }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+    className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-6 text-white relative overflow-hidden"
+  >
+    <div className="absolute top-0 right-0 w-24 h-24 bg-white opacity-10 rounded-bl-full"></div>
+    <Code className="mb-3" size={24} />
+    <h4 className="font-bold text-lg mb-2">{extension}</h4>
+    <p className="text-blue-100 text-sm">VS Code Extension for enhanced development workflow</p>
+  </motion.div>
+);
+
+export default function GlimorShowcase() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const projects = [
     {
-      name: "CaffeTest",
-      icon: <Coffee className="w-8 h-8" />,
-      description: "AI-powered testing with VS Code integration. Automated bug reporting and test case generation managed by Artificial Intelligence.",
-      features: ["AI Integration", "VS Code Extension", "Auto Bug Detection", "Test Case Generation"]
+      name: "DooDot",
+      level: "Basic",
+      description: "AI-integrated TODO web application with calendar functionality for smart task tracking and management.",
+      features: ["AI Integration", "Calendar", "CRUD Operations", "Task Tracking"],
+      icon: <CheckCircle size={24} />
     },
     {
-      name: "CuraCore",
-      icon: <Bug className="w-8 h-8" />,
-      description: "Advanced bug management and tracking tool. Add bugs manually, report to developers with commenting system.",
-      features: ["Bug Tracking", "Developer Comments", "Manual Reporting", "Team Collaboration"]
+      name: "Metronique",
+      level: "Intermediate",
+      description: "Work tracking and management application featuring Kanban boards for visual project organization.",
+      features: ["Kanban Board", "Task Management", "Team Collaboration", "Progress Tracking"],
+      icon: <Calendar size={24} />
     },
     {
       name: "Rabbit",
-      icon: <BarChart3 className="w-8 h-8" />,
-      description: "Comprehensive reporting web application designed specifically for K16 data analysis and insights.",
-      features: ["K16 Data Analysis", "Advanced Reporting", "Data Visualization", "Custom Dashboards"]
+      level: "Advanced",
+      description: "AI-powered API testing platform integrated with GitHub for automated testing workflows.",
+      features: ["OpenAI", "GitHub Integration", "Auto Testing", "API Management"],
+      icon: <Zap size={24} />
     },
     {
-      name: "Caffe",
-      icon: <Shield className="w-8 h-8" />,
-      description: "Complete cloud-based testing platform for web and mobile applications with unified framework and reporting.",
-      features: ["Cloud Testing", "Web & Mobile", "Unified Framework", "Comprehensive Reports"]
+      name: "Curacore",
+      level: "Basic",
+      description: "Quality assurance platform for single testers with comprehensive bug tracking and management.",
+      features: ["Bug Tracking", "QA Management", "Reporting", "Issue Resolution"],
+      icon: <Bug size={24} />
     },
     {
-      name: "Metronix",
-      icon: <FolderKanban className="w-8 h-8" />,
-      description: "Complete project management web application - a streamlined version of enterprise project management tools.",
-      features: ["Project Management", "Task Tracking", "Team Collaboration", "Timeline Views"]
+      name: "Caffetest",
+      level: "Advanced",
+      description: "AI-enhanced testing platform with VS Code integration for automated documentation and testing.",
+      features: ["OpenAI", "VS Code Extension", "Auto Documentation", "Test Management"],
+      icon: <TestTube size={24} />
     },
     {
-      name: "DoDot",
-      icon: <CheckSquare className="w-8 h-8" />,
-      description: "The most advanced AI-integrated to-do application with email notifications and comprehensive tracking system.",
-      features: ["AI Integration", "Email Notifications", "Advanced Tracking", "Smart Organization"]
+      name: "Calf",
+      level: "Super Advanced",
+      description: "All-in-one desktop testing platform supporting web, mobile, and desktop application testing.",
+      features: ["Multi-platform", "Automation", "Project Management", "Comprehensive Testing"],
+      icon: <Shield size={24} />
     },
     {
-      name: "Labentia",
-      icon: <Users className="w-8 h-8" />,
-      description: "Global skill swapping platform that works like social media, connecting people to exchange knowledge and expertise.",
-      features: ["Skill Exchange", "Social Features", "Global Network", "Knowledge Sharing"]
+      name: "Loventia",
+      level: "Advanced",
+      description: "Social media platform combining LinkedIn, Instagram, Udemy, Facebook, and Twitter features for skill sharing.",
+      features: ["Social Media", "Skill Sharing", "Multi-platform", "Community"],
+      icon: <Users size={24} />
     },
     {
-      name: "Arkemat",
-      icon: <ShoppingBag className="w-8 h-8" />,
-      description: "Revolutionary marketplace where users buy and sell by exchanging items - the ultimate bartering platform.",
-      features: ["Item Exchange", "Peer Trading", "Smart Matching", "Secure Transactions"]
+      name: "Arcanemart",
+      level: "Advanced",
+      description: "Modern e-commerce platform enabling product exchange without traditional monetary transactions.",
+      features: ["E-commerce", "Product Exchange", "Modern UI", "Trade System"],
+      icon: <ShoppingCart size={24} />
     },
     {
-      name: "Onerio",
-      icon: <Video className="w-8 h-8" />,
-      description: "Transform your dreams into movies, films, or AI-generated videos with cutting-edge technology.",
-      features: ["Dream to Video", "AI Generation", "Movie Creation", "Creative Tools"]
+      name: "Veloria",
+      level: "Intermediate",
+      description: "Lightweight communication platform inspired by Slack for team collaboration and messaging.",
+      features: ["Team Communication", "Real-time Messaging", "Collaboration", "Lightweight"],
+      icon: <MessageSquare size={24} />
     },
     {
-      name: "Valoria",
-      icon: <MessageSquare className="w-8 h-8" />,
-      description: "Real-time chat and video calling application with advanced communication features.",
-      features: ["Real-time Chat", "Video Calling", "Group Communication", "Advanced Features"]
+      name: "Oneiro",
+      level: "Advanced",
+      description: "Dream generation platform powered by Google Veo 3 AI for creating personalized dream experiences.",
+      features: ["Google Veo 3", "AI Generation", "Personalized", "Interactive"],
+      icon: <Cloud size={24} />
+    },
+    {
+      name: "Photo Forensic",
+      level: "Advanced",
+      description: "AI-powered photo analysis tool using Gemini and OpenAI to detect AI-generated or edited images.",
+      features: ["Gemini AI", "OpenAI", "Photo Detection", "Forensic Analysis"],
+      icon: <Camera size={24} />
     }
-  ]
+  ];
 
-  const services = [
+  const extensions = [
+    "Caffetest-Tracer",
+    "Rabbit-Provider",
+    "Selenium-Cucumber",
+    "Metronique-Insights"
+  ];
+
+  const testimonials = [
     {
-      title: "Web Application Development",
-      description: "Complete full-stack web solutions with modern technologies",
-      icon: <Code className="w-12 h-12 text-blue-600" />
+      name: "Sarah Johnson",
+      company: "TechCorp Solutions",
+      role: "CTO",
+      content: "Bat Cropdelivered exceptional results on our full-stack project. The AI integration in their applications is truly innovative and ahead of the curve.",
+      rating: 5
     },
     {
-      title: "Automation Testing",
-      description: "Advanced automated testing solutions powered by AI",
-      icon: <Zap className="w-12 h-12 text-blue-600" />
+      name: "Michael Chen",
+      company: "StartupXYZ",
+      role: "Product Manager",
+      content: "Working with Bat Cropwas a game-changer. Their QA processes caught critical bugs early, and their mobile app development exceeded our expectations.",
+      rating: 5
     },
     {
-      title: "Cyber Security & Ethical Hacking",
-      description: "Comprehensive security audits and penetration testing",
-      icon: <Shield className="w-12 h-12 text-blue-600" />
+      name: "Emily Rodriguez",
+      company: "Global Enterprises",
+      role: "IT Director",
+      content: "The cybersecurity assessment and ethical hacking services provided invaluable insights. Highly professional and thorough work.",
+      rating: 5
     },
     {
-      title: "Mobile Application Development",
-      description: "Cross-platform mobile solutions for iOS and Android",
-      icon: <Smartphone className="w-12 h-12 text-blue-600" />
+      name: "David Kumar",
+      company: "InnovateLabs",
+      role: "Lead Developer",
+      content: "Glimor's VS Code extensions have significantly improved our development workflow. The attention to detail in every project is remarkable.",
+      rating: 5
     }
-  ]
-
-  const AnimatedSection = ({ children, className = "" }) => {
-    const ref = React.useRef(null)
-    const isInView = useInView(ref, { once: true, amount: 0.3 })
-
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    )
-  }
-
-  const ProductCard = ({ product, index }) => {
-    const ref = React.useRef(null)
-    const isInView = useInView(ref, { once: true })
-
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-50 group hover:border-blue-200"
-      >
-        <div className="flex items-center mb-4">
-          <div className="p-3 bg-blue-50 rounded-lg text-blue-600 group-hover:bg-blue-100 transition-colors">
-            {product.icon}
-          </div>
-          <h3 className="text-xl font-bold text-gray-800 ml-4">{product.name}</h3>
-        </div>
-        <p className="text-gray-600 mb-6 leading-relaxed">{product.description}</p>
-        <div className="grid grid-cols-2 gap-2">
-          {product.features.map((feature, idx) => (
-            <div key={idx} className="flex items-center text-sm text-blue-600">
-              <Star className="w-4 h-4 mr-2" />
-              {feature}
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    )
-  }
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50">
+    <div className="min-h-screen bg-gradient-to-br from-white via-sky-50 to-blue-50">
 
 
       {/* Hero Section */}
-      <section className="pt-8 pb-16 relative overflow-hidden">
-        <motion.div 
-          style={{ y: backgroundY }}
-          className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-sky-100/30"
-        />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold mb-6"
-            >
-              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 bg-clip-text text-transparent">
-                Innovation
+      <section id="home" className="relative py-20 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-600 via-green-600 to-blue-800 bg-clip-text text-transparent">
+                Full Stack Innovation
               </span>
-              <br />
-              <span className="text-gray-800">Meets Excellence</span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed"
-            >
-              Nexly delivers cutting-edge web applications, automation testing, cybersecurity solutions, 
-              and mobile development with our suite of 10 revolutionary products.
-            </motion.p>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
+              Crafting cutting-edge web applications, mobile solutions, and cybersecurity services with AI integration and modern development practices.
+            </p>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-            >
-              <button className="bg-gradient-to-r from-blue-600 to-sky-500 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
-                Explore Products
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300">
-                Watch Demo
-              </button>
-            </motion.div>
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 mb-16"
+          >
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
+                <AnimatedCounter end={120} />+
+              </div>
+              <p className="text-gray-600">Vanilla JS Projects</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
+                <AnimatedCounter end={13} />+
+              </div>
+              <p className="text-gray-600">Full Stack Apps</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">
+                <AnimatedCounter end={250} />K+
+              </div>
+              <p className="text-gray-600">Lines of Code</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">
+                <AnimatedCounter end={30} />+
+              </div>
+              <p className="text-gray-600">Projects Tested</p>
+            </div>
+          </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto"
-            >
-              {[
-                { number: '10+', label: 'Products' },
-                { number: '1000+', label: 'Happy Clients' },
-                { number: '99.9%', label: 'Uptime' },
-                { number: '24/7', label: 'Support' }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-2">{stat.number}</div>
-                  <div className="text-gray-600">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
+          {/* Services Overview */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16"
+          >
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-blue-100">
+              <Globe className="text-blue-600 mb-4" size={32} />
+              <h3 className="font-bold text-gray-800 mb-2">Full Stack Development</h3>
+              <p className="text-gray-600 text-sm">Modern web applications with cutting-edge technologies</p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-green-100">
+              <Smartphone className="text-green-600 mb-4" size={32} />
+              <h3 className="font-bold text-gray-800 mb-2">Mobile Development</h3>
+              <p className="text-gray-600 text-sm">Cross-platform mobile solutions</p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-purple-100">
+              <TestTube className="text-purple-600 mb-4" size={32} />
+              <h3 className="font-bold text-gray-800 mb-2">Quality Assurance</h3>
+              <p className="text-gray-600 text-sm">Comprehensive testing and QA services</p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-red-100">
+              <Shield className="text-red-600 mb-4" size={32} />
+              <h3 className="font-bold text-gray-800 mb-2">Cybersecurity</h3>
+              <p className="text-gray-600 text-sm">Ethical hacking and security assessments</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              Featured Projects
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover our innovative solutions spanning from AI-integrated applications to comprehensive testing platforms
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.name} project={project} index={index} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <AnimatedSection className="py-20 bg-white" id="services">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Our <span className="text-blue-600">Services</span>
+      {/* VS Code Extensions */}
+      <section id="extensions" className="py-20 px-4 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              VS Code Extensions
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Comprehensive technology solutions to power your digital transformation
+            <p className="text-xl text-gray-600">
+              Enhance your development workflow with our custom VS Code extensions
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {extensions.map((extension, index) => (
+              <ExtensionCard key={extension} extension={extension} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials" className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              Client Testimonials
+            </h2>
+            <p className="text-xl text-gray-600">
+              What our clients say about working with Glimor
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-8 rounded-2xl bg-blue-50/50 hover:bg-blue-50 transition-all duration-300 group"
+                className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 border border-blue-100"
               >
-                <div className="mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="text-yellow-500 fill-current" size={20} />
+                  ))}
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</p>
+                <div>
+                  <p className="font-bold text-gray-800">{testimonial.name}</p>
+                  <p className="text-gray-600">{testimonial.role} at {testimonial.company}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* Products Section */}
-      <AnimatedSection className="py-20 bg-gradient-to-br from-blue-50 to-sky-50" id="products">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Revolutionary <span className="text-blue-600">Product Ecosystem</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience the future of technology with our integrated suite of 10 cutting-edge applications
-            </p>
-          </div>
-
-          <div className="space-y-20">
-            {/* CaffeTest */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col lg:flex-row items-center gap-12"
-            >
-              <div className="lg:w-1/2 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center">
-                    <Coffee className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-800">CaffeTest</h3>
-                </div>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Revolutionary AI-powered testing platform seamlessly integrated with Visual Studio Code. 
-                  Automated test case generation and intelligent bug reporting powered by advanced AI algorithms.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["AI Integration", "VS Code Extension", "Auto Bug Detection", "Smart Testing"].map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-amber-200 rounded-3xl transform rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <Code className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                        <p className="text-orange-700 font-semibold">AI-Powered Testing Suite</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CuraCore */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col lg:flex-row-reverse items-center gap-12"
-            >
-              <div className="lg:w-1/2 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center">
-                    <Bug className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-800">CuraCore</h3>
-                </div>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Advanced bug management and tracking system that streamlines development workflows. 
-                  Real-time collaboration between developers and QA teams with intelligent reporting.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["Bug Tracking", "Team Collaboration", "Real-time Updates", "Smart Reports"].map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-200 to-pink-200 rounded-3xl transform -rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
-                        <p className="text-red-700 font-semibold">Bug Management Hub</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Rabbit */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col lg:flex-row items-center gap-12"
-            >
-              <div className="lg:w-1/2 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center">
-                    <BarChart3 className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-800">Rabbit</h3>
-                </div>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Comprehensive K16 data reporting platform with advanced analytics and visualization capabilities. 
-                  Transform complex data into actionable insights with interactive dashboards.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["K16 Data Analysis", "Interactive Dashboards", "Real-time Analytics", "Custom Reports"].map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-200 to-indigo-200 rounded-3xl transform rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <BarChart3 className="w-16 h-16 text-purple-500 mx-auto mb-4" />
-                        <p className="text-purple-700 font-semibold">Advanced Analytics Platform</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Caffe */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col lg:flex-row-reverse items-center gap-12"
-            >
-              <div className="lg:w-1/2 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center">
-                    <Zap className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-800">Caffe</h3>
-                </div>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Complete cloud-based testing platform for web and mobile applications. 
-                  Unified framework with comprehensive reporting and seamless integration capabilities.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["Cloud Testing", "Multi-Platform", "Unified Framework", "Comprehensive Reports"].map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-200 to-emerald-200 rounded-3xl transform -rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <Zap className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                        <p className="text-green-700 font-semibold">Cloud Testing Suite</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Metronix */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col lg:flex-row items-center gap-12"
-            >
-              <div className="lg:w-1/2 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
-                    <FolderKanban className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-800">Metronix</h3>
-                </div>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Streamlined project management platform designed for modern teams. 
-                  Powerful yet intuitive interface with advanced collaboration and tracking features.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["Project Management", "Team Collaboration", "Timeline Views", "Resource Planning"].map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-3xl transform rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <FolderKanban className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                        <p className="text-blue-700 font-semibold">Project Management Hub</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Show remaining products in a more compact grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-20"
-            >
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold text-gray-800 mb-4">More Innovative Solutions</h3>
-                <p className="text-lg text-gray-600">Discover our complete ecosystem of productivity and collaboration tools</p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                {[
-                  { name: "DoDot", icon: CheckSquare, color: "from-yellow-500 to-orange-500", desc: "AI-powered to-do app with smart notifications" },
-                  { name: "Labentia", icon: Users, color: "from-pink-500 to-rose-500", desc: "Global skill swapping social platform" },
-                  { name: "Arkemat", icon: ShoppingBag, color: "from-teal-500 to-green-500", desc: "Revolutionary item exchange marketplace" },
-                  { name: "Onerio", icon: Video, color: "from-violet-500 to-purple-500", desc: "Transform dreams into AI-generated videos" },
-                  { name: "Valoria", icon: MessageSquare, color: "from-indigo-500 to-blue-500", desc: "Real-time chat and video calling" }
-                ].map((product, index) => (
-                  <motion.div
-                    key={product.name}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                  >
-                    <div className={`w-12 h-12 bg-gradient-to-r ${product.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <product.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-800 mb-2">{product.name}</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">{product.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </AnimatedSection>
-      // Replace the entire Products Section with this corrected version:
-
-{/* Products Section */}
-<AnimatedSection className="py-20 bg-gradient-to-br from-blue-50 to-sky-50" id="products">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-        Revolutionary <span className="text-blue-600">Product Ecosystem</span>
-      </h2>
-      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-        Experience the future of technology with our integrated suite of 10 cutting-edge applications
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-      {products.map((product, index) => (
-        <ProductCard key={product.name} product={product} index={index} />
-      ))}
-    </div>
-  </div>
-</AnimatedSection>
-
-      {/* CTA Section */}
-      <AnimatedSection className="py-20 bg-gradient-to-r from-blue-600 to-sky-500 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6"
-          >
-            Ready to Transform Your Business?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl mb-8 opacity-90"
-          >
-            Join thousands of companies already using Nexly's innovative solutions
-          </motion.p>
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4 bg-gradient-to-br from-blue-600 to-green-600 text-white">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            animate={{ opacity: 1, y: 0 }}
           >
-            <button className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center group">
-              Start Free Trial
-              <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300">
-              Contact Sales
-            </button>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Let's Build Something Amazing Together
+            </h2>
+            <p className="text-xl mb-8 opacity-90">
+              Ready to transform your ideas into powerful digital solutions? Let's discuss your project.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors inline-flex items-center gap-2"
+            >
+              Get In Touch <ChevronRight size={20} />
+            </motion.button>
           </motion.div>
         </div>
-      </AnimatedSection>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+      <footer className="bg-gray-900 text-white py-12 px-4 relative overflow-hidden">
+        {/* Background SVG Structure */}
+        <div className="absolute inset-0 opacity-5">
+          <svg className="w-full h-full" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            <circle cx="200" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+            <circle cx="1000" cy="300" r="120" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+            <path d="M100,200 Q400,100 700,250 T1100,200" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.2" />
+            <polygon points="800,50 850,100 800,150 750,100" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+            <rect x="50" y="280" width="60" height="60" rx="8" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+          </svg>
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-sky-500 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+              <div className="flex items-center gap-3 mb-4">
+                <div className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+                  Bat Crop
                 </div>
-                <span className="text-2xl font-bold">Nexly</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-blue-400">
+                  <path d="M10 2v20l4-4h6V2H10z" fill="currentColor" />
+                  <path d="M6 4v2H4v12h2v2l4-4V4H6z" fill="currentColor" opacity="0.7" />
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-amber-400">
+                  <path d="M7 14c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.91-1.93 3.12-3.12c.39-.39.39-1.02 0-1.41z" fill="currentColor" />
+                </svg>
               </div>
-              <p className="text-gray-400 leading-relaxed">
-                Empowering businesses with innovative technology solutions and cutting-edge applications.
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Your trusted partner for full-stack development, mobile applications, QA services, and cybersecurity solutions.
               </p>
+              <div className="flex space-x-4">
+                <a href="https://github.com/GyanaprakashKhandual" target="_blank" rel="noopener noreferrer">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/gyana-prakash-khandual-79b205332/" target="_blank" rel="noopener noreferrer">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400 hover:text-red-400 transition-colors cursor-pointer">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+              </div>
             </div>
-            
             <div>
-              <h4 className="text-lg font-semibold mb-4">Products</h4>
+              <h4 className="font-bold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">CaffeTest</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">CuraCore</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Rabbit</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">View All</a></li>
+                <li>Full Stack Development</li>
+                <li>Mobile App Development</li>
+                <li>Quality Assurance</li>
+                <li>Cybersecurity</li>
               </ul>
             </div>
-            
             <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
+              <h4 className="font-bold mb-4">Technologies</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Web Development</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Testing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Mobile Apps</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+                <li>MERN Stack</li>
+                <li>Next.js</li>
+                <li>React Native</li>
+                <li>AI Integration</li>
               </ul>
             </div>
           </div>
-          
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Nexly. All rights reserved. Built with innovation and excellence.</p>
+            <p>&copy; 2024 Glimor. All rights reserved. Crafted with passion for innovation.</p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
-export default Nexly
