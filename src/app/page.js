@@ -1,16 +1,10 @@
-import Navbar from "./components/assets/Navbar";
-import SkillsScrollBar from "./components/Skillbar";
-import GlimorShowcase from "./pages/app/Home";
-import Nexly from "./pages/app/Home";
-import ProjectCard from "./pages/app/TestProject";
-import SkillsShowcase from "./pages/app/TestSkill";
-import SkillsPortfolio from "./pages/app/WebSkills";
+import Homepage from "./pages/app/Home";
+
 
 export default function Home() {
   return(
     <div>
-      <Navbar/>
-        <GlimorShowcase/>
+        <Homepage/>
     </div>
   )
 }

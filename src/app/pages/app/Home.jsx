@@ -25,6 +25,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import { FaCoffee } from 'react-icons/fa';
 
 const AnimatedCounter = ({ end, duration = 2 }) => {
   const [count, setCount] = useState(0);
@@ -65,9 +66,9 @@ const ProjectCard = ({ project, index }) => (
           {project.icon}
         </div>
         <span className={`px-3 py-1 rounded-full text-xs font-medium ${project.level === 'Basic' ? 'bg-green-100 text-green-700' :
-            project.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
-              project.level === 'Advanced' ? 'bg-purple-100 text-purple-700' :
-                'bg-red-100 text-red-700'
+          project.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
+            project.level === 'Advanced' ? 'bg-purple-100 text-purple-700' :
+              'bg-red-100 text-red-700'
           }`}>
           {project.level}
         </span>
@@ -109,7 +110,7 @@ const ExtensionCard = ({ extension, index }) => (
   </motion.div>
 );
 
-export default function GlimorShowcase() {
+export default function Homepage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const projects = [
@@ -452,16 +453,10 @@ export default function GlimorShowcase() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
+                <FaCoffee className='w-8 h-8 text-blue-900' />
                 <div className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
                   Bat Crop
                 </div>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-blue-400">
-                  <path d="M10 2v20l4-4h6V2H10z" fill="currentColor" />
-                  <path d="M6 4v2H4v12h2v2l4-4V4H6z" fill="currentColor" opacity="0.7" />
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-amber-400">
-                  <path d="M7 14c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.91-1.93 3.12-3.12c.39-.39.39-1.02 0-1.41z" fill="currentColor" />
-                </svg>
               </div>
               <p className="text-gray-400 leading-relaxed mb-6">
                 Your trusted partner for full-stack development, mobile applications, QA services, and cybersecurity solutions.
